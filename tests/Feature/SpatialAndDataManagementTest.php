@@ -160,7 +160,10 @@ class SpatialAndDataManagementTest extends TestCase
         $response->assertSee('Dr. H. Rusli Habibie', false);
         $response->assertSee('Ir. H. Marwan Monoarfa', false);
         $response->assertSee('sig-name', false);
+        $response->assertSee('sig-jabatan', false);
         $response->assertSee('editable-nip', false);
+        $response->assertSee('openEditModal', false);
+        $response->assertSee('editModal', false);
         $this->assertSame(1, substr_count($response->getContent(), 'class="kop-logo"'));
     }
 

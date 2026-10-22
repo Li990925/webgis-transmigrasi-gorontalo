@@ -313,13 +313,25 @@
             transition: all 0.15s ease;
         }
 
+        .sig-jabatan {
+            font-weight: 600;
+            margin-bottom: 4px;
+            cursor: text;
+            display: inline-block;
+            padding: 1px 4px;
+            border-radius: 4px;
+            transition: all 0.15s ease;
+        }
+
         .sig-name:hover,
+        .sig-jabatan:hover,
         .editable-nip:hover {
             background-color: rgba(59, 130, 246, 0.08);
             outline: 1px dashed #3b82f6;
         }
 
         .sig-name:focus,
+        .sig-jabatan:focus,
         .editable-nip:focus {
             background-color: #eff6ff;
             outline: 2px solid #2563eb;
@@ -342,6 +354,181 @@
             transition: all 0.15s ease;
         }
 
+        /* Tombol Edit Pejabat */
+        .btn-edit-sig {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #1e293b;
+            font-size: 8.5pt;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        .btn-edit-sig:hover {
+            background: #eff6ff;
+            border-color: #3b82f6;
+            color: #1d4ed8;
+        }
+
+        /* Modal Dialog Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            border-radius: 12px;
+            max-width: 680px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.2s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.96) translateY(-8px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            background: #f8fafc;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-close-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #64748b;
+            padding: 4px;
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+        .modal-close-btn:hover {
+            color: #0f172a;
+            background: #e2e8f0;
+        }
+
+        .modal-body {
+            padding: 20px;
+            font-size: 9.5pt;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 640px) {
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-section-title {
+            font-size: 9pt;
+            font-weight: 700;
+            color: #1e40af;
+            background: #eff6ff;
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 8.5pt;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 4px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 7px 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 9pt;
+            font-family: inherit;
+            color: #0f172a;
+            box-sizing: border-box;
+            transition: all 0.15s;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            border-top: 1px solid #e2e8f0;
+            background: #f8fafc;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .btn-reset {
+            background: none;
+            border: 1px solid #fca5a5;
+            color: #b91c1c;
+            font-size: 8.5pt;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-reset:hover {
+            background: #fee2e2;
+        }
+
         /* Print Media Styles */
         @media print {
             body {
@@ -356,13 +543,18 @@
                 max-width: 100%;
             }
 
-            .no-print {
+            .no-print,
+            .btn-edit-sig,
+            .modal-overlay {
                 display: none !important;
             }
 
             .sig-name,
             .sig-name:hover,
             .sig-name:focus,
+            .sig-jabatan,
+            .sig-jabatan:hover,
+            .sig-jabatan:focus,
             .editable-nip,
             .editable-nip:hover,
             .editable-nip:focus {
@@ -415,7 +607,11 @@
             </a>
             <span style="font-size:13px; color:#cbd5e1;">Format Resmi Cetak Dokumen / Simpan PDF</span>
         </div>
-        <div style="display:flex; gap:10px;">
+        <div style="display:flex; gap:10px; align-items:center;">
+            <button type="button" onclick="openEditModal()" class="btn btn-secondary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                Edit Kedudukan, Nama & NIP
+            </button>
             <button onclick="window.print()" class="btn btn-primary">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                 Cetak / Simpan PDF (Ctrl+P)
@@ -563,11 +759,19 @@
             </div>
         @endforeach
 
+        <!-- Tombol Edit Pejabat (no-print) -->
+        <div style="display:flex; justify-content:flex-end; margin-top:28px; margin-bottom:-10px;" class="no-print">
+            <button type="button" onclick="openEditModal()" class="btn-edit-sig" title="Edit Kedudukan, Nama, dan angka NIP pejabat penandatangan">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                Edit Kedudukan, Nama & NIP
+            </button>
+        </div>
+
         <!-- Blok Pengesahan Tanda Tangan -->
         <div class="signature-container">
             <div class="sig-block">
                 <div>Mengetahui,</div>
-                <div style="font-weight:600; margin-bottom:4px;">Kepala Dinas Tenaga Kerja, ESDM dan Transmigrasi<br>Provinsi Gorontalo</div>
+                <div class="sig-jabatan" id="sig1_jabatan" contenteditable="true" spellcheck="false" title="Klik langsung untuk mengedit kedudukan">Kepala Dinas Tenaga Kerja, ESDM dan Transmigrasi<br>Provinsi Gorontalo</div>
                 <div class="sig-space"></div>
                 <div class="sig-name" id="sig1_nama" contenteditable="true" spellcheck="false" title="Klik langsung untuk mengedit nama pejabat">Dr. H. Rusli Habibie, M.Si</div>
                 <div class="sig-nip">NIP. <span class="editable-nip" id="sig1_nip" contenteditable="true" spellcheck="false" title="Klik langsung untuk mengedit nomor NIP">19680512 199303 1 004</span></div>
@@ -575,7 +779,7 @@
 
             <div class="sig-block">
                 <div>Gorontalo, {{ $tanggalCetak }}</div>
-                <div style="font-weight:600; margin-bottom:4px;">Kepala Bidang Pengembangan Kawasan Transmigrasi<br>Dinas Nakertrans Provinsi Gorontalo</div>
+                <div class="sig-jabatan" id="sig2_jabatan" contenteditable="true" spellcheck="false" title="Klik langsung untuk mengedit kedudukan">Kepala Bidang Pengembangan Kawasan Transmigrasi<br>Dinas Nakertrans Provinsi Gorontalo</div>
                 <div class="sig-space"></div>
                 <div class="sig-name" id="sig2_nama" contenteditable="true" spellcheck="false" title="Klik langsung untuk mengedit nama pejabat">Ir. H. Marwan Monoarfa, M.M</div>
                 <div class="sig-nip">NIP. <span class="editable-nip" id="sig2_nip" contenteditable="true" spellcheck="false" title="Klik langsung untuk mengedit nomor NIP">19740918 200003 1 002</span></div>
@@ -584,16 +788,97 @@
 
     </div>
 
+    <!-- Modal Dialog Edit Kedudukan, Nama & Angka NIP -->
+    <div id="editModal" class="modal-overlay" onclick="if(event.target===this) closeEditModal()">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#2563eb;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                    Edit Kedudukan, Nama & Angka NIP Pejabat
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeEditModal()" title="Tutup">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-grid">
+                    <!-- Kolom Kiri: Pihak Mengetahui -->
+                    <div>
+                        <div class="form-section-title">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            Pejabat 1 (Pihak Mengetahui)
+                        </div>
+                        <div class="form-group">
+                            <label for="modal_sig1_jabatan">Kedudukan / Jabatan</label>
+                            <textarea id="modal_sig1_jabatan" rows="3" class="form-control" placeholder="Kepala Dinas Tenaga Kerja, ESDM dan Transmigrasi&#10;Provinsi Gorontalo"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="modal_sig1_nama">Nama Lengkap & Gelar</label>
+                            <input type="text" id="modal_sig1_nama" class="form-control" placeholder="Dr. H. Rusli Habibie, M.Si">
+                        </div>
+                        <div class="form-group">
+                            <label for="modal_sig1_nip">Angka NIP</label>
+                            <input type="text" id="modal_sig1_nip" class="form-control" placeholder="19680512 199303 1 004">
+                        </div>
+                    </div>
+
+                    <!-- Kolom Kanan: Pihak Penandatangan -->
+                    <div>
+                        <div class="form-section-title">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            Pejabat 2 (Pihak Penandatangan)
+                        </div>
+                        <div class="form-group">
+                            <label for="modal_sig2_jabatan">Kedudukan / Jabatan</label>
+                            <textarea id="modal_sig2_jabatan" rows="3" class="form-control" placeholder="Kepala Bidang Pengembangan Kawasan Transmigrasi&#10;Dinas Nakertrans Provinsi Gorontalo"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="modal_sig2_nama">Nama Lengkap & Gelar</label>
+                            <input type="text" id="modal_sig2_nama" class="form-control" placeholder="Ir. H. Marwan Monoarfa, M.M">
+                        </div>
+                        <div class="form-group">
+                            <label for="modal_sig2_nip">Angka NIP</label>
+                            <input type="text" id="modal_sig2_nip" class="form-control" placeholder="19740918 200003 1 002">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="resetToDefault()" class="btn-reset" title="Kembalikan ke data awal">
+                    Reset ke Default
+                </button>
+                <div style="display:flex; gap:10px;">
+                    <button type="button" onclick="closeEditModal()" class="btn" style="background:#e2e8f0; color:#334155;">
+                        Batal
+                    </button>
+                    <button type="button" onclick="saveFromModal()" class="btn btn-primary" style="background:#2563eb; color:#ffffff;">
+                        Simpan Perubahan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        const STORAGE_KEY = 'webgis_transmigrasi_laporan_ttd';
+        const STORAGE_KEY = 'webgis_transmigrasi_laporan_ttd_v2';
+        const defaultSignatures = {
+            sig1_jabatan: 'Kepala Dinas Tenaga Kerja, ESDM dan Transmigrasi<br>Provinsi Gorontalo',
+            sig1_nama: 'Dr. H. Rusli Habibie, M.Si',
+            sig1_nip: '19680512 199303 1 004',
+            sig2_jabatan: 'Kepala Bidang Pengembangan Kawasan Transmigrasi<br>Dinas Nakertrans Provinsi Gorontalo',
+            sig2_nama: 'Ir. H. Marwan Monoarfa, M.M',
+            sig2_nip: '19740918 200003 1 002'
+        };
 
         function loadSignatures() {
             try {
                 const saved = localStorage.getItem(STORAGE_KEY);
                 if (saved) {
                     const data = JSON.parse(saved);
+                    if (data.sig1_jabatan) document.getElementById('sig1_jabatan').innerHTML = data.sig1_jabatan;
                     if (data.sig1_nama) document.getElementById('sig1_nama').innerText = data.sig1_nama;
                     if (data.sig1_nip) document.getElementById('sig1_nip').innerText = data.sig1_nip;
+                    if (data.sig2_jabatan) document.getElementById('sig2_jabatan').innerHTML = data.sig2_jabatan;
                     if (data.sig2_nama) document.getElementById('sig2_nama').innerText = data.sig2_nama;
                     if (data.sig2_nip) document.getElementById('sig2_nip').innerText = data.sig2_nip;
                 }
@@ -603,8 +888,10 @@
         function saveSignatures() {
             try {
                 const data = {
+                    sig1_jabatan: document.getElementById('sig1_jabatan').innerHTML.trim(),
                     sig1_nama: document.getElementById('sig1_nama').innerText.trim(),
                     sig1_nip: document.getElementById('sig1_nip').innerText.trim(),
+                    sig2_jabatan: document.getElementById('sig2_jabatan').innerHTML.trim(),
                     sig2_nama: document.getElementById('sig2_nama').innerText.trim(),
                     sig2_nip: document.getElementById('sig2_nip').innerText.trim()
                 };
@@ -612,16 +899,72 @@
             } catch (e) {}
         }
 
+        function openEditModal() {
+            document.getElementById('modal_sig1_jabatan').value = document.getElementById('sig1_jabatan').innerHTML
+                .replace(/<br\s*[\/]?>/gi, '\n')
+                .replace(/<\/?[^>]+(>|$)/g, '')
+                .trim();
+            document.getElementById('modal_sig1_nama').value = document.getElementById('sig1_nama').innerText.trim();
+            document.getElementById('modal_sig1_nip').value = document.getElementById('sig1_nip').innerText.trim();
+
+            document.getElementById('modal_sig2_jabatan').value = document.getElementById('sig2_jabatan').innerHTML
+                .replace(/<br\s*[\/]?>/gi, '\n')
+                .replace(/<\/?[^>]+(>|$)/g, '')
+                .trim();
+            document.getElementById('modal_sig2_nama').value = document.getElementById('sig2_nama').innerText.trim();
+            document.getElementById('modal_sig2_nip').value = document.getElementById('sig2_nip').innerText.trim();
+
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('active');
+        }
+
+        function saveFromModal() {
+            document.getElementById('sig1_jabatan').innerHTML = document.getElementById('modal_sig1_jabatan').value.trim().replace(/\n/g, '<br>');
+            document.getElementById('sig1_nama').innerText = document.getElementById('modal_sig1_nama').value.trim();
+            document.getElementById('sig1_nip').innerText = document.getElementById('modal_sig1_nip').value.trim();
+
+            document.getElementById('sig2_jabatan').innerHTML = document.getElementById('modal_sig2_jabatan').value.trim().replace(/\n/g, '<br>');
+            document.getElementById('sig2_nama').innerText = document.getElementById('modal_sig2_nama').value.trim();
+            document.getElementById('sig2_nip').innerText = document.getElementById('modal_sig2_nip').value.trim();
+
+            saveSignatures();
+            closeEditModal();
+        }
+
+        function resetToDefault() {
+            if (confirm('Kembalikan data kedudukan, nama, dan NIP ke pengaturan awal?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                document.getElementById('sig1_jabatan').innerHTML = defaultSignatures.sig1_jabatan;
+                document.getElementById('sig1_nama').innerText = defaultSignatures.sig1_nama;
+                document.getElementById('sig1_nip').innerText = defaultSignatures.sig1_nip;
+
+                document.getElementById('sig2_jabatan').innerHTML = defaultSignatures.sig2_jabatan;
+                document.getElementById('sig2_nama').innerText = defaultSignatures.sig2_nama;
+                document.getElementById('sig2_nip').innerText = defaultSignatures.sig2_nip;
+
+                closeEditModal();
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             loadSignatures();
 
-            ['sig1_nama', 'sig1_nip', 'sig2_nama', 'sig2_nip'].forEach(function(id) {
+            ['sig1_jabatan', 'sig1_nama', 'sig1_nip', 'sig2_jabatan', 'sig2_nama', 'sig2_nip'].forEach(function(id) {
                 const el = document.getElementById(id);
                 if (el) {
                     el.addEventListener('input', saveSignatures);
                     el.addEventListener('blur', saveSignatures);
                 }
             });
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeEditModal();
+            }
         });
     </script>
 </body>
