@@ -754,32 +754,68 @@
                 </div>
             </div>
 
+            <!-- Tabular Search & Filter Toolbar -->
+            <div class="px-4 py-2.5 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3 shrink-0">
+                <div class="flex flex-wrap items-center gap-2 flex-1 min-w-[280px]">
+                    <div class="relative flex-1 min-w-[220px] max-w-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </div>
+                        <input type="text" id="tabular-search-input" placeholder="Cari nama kawasan, kecamatan, desa..." 
+                            class="w-full pl-9 pr-3 py-1.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] transition-all">
+                    </div>
+                    <select id="tabular-filter-kabupaten" class="py-1.5 px-3 rounded-xl bg-white border border-slate-300 text-xs text-slate-700 font-medium focus:outline-none focus:ring-2 focus:ring-[#1a73e8] transition-all cursor-pointer">
+                        <option value="all">Semua Kabupaten</option>
+                        <option value="Boalemo">Kab. Boalemo</option>
+                        <option value="Gorontalo">Kab. Gorontalo</option>
+                        <option value="Gorontalo Utara">Kab. Gorontalo Utara</option>
+                        <option value="Pohuwato">Kab. Pohuwato</option>
+                    </select>
+                    <select id="tabular-filter-shm" class="py-1.5 px-3 rounded-xl bg-white border border-slate-300 text-xs text-slate-700 font-medium focus:outline-none focus:ring-2 focus:ring-[#1a73e8] transition-all cursor-pointer">
+                        <option value="all">Semua Status SHM</option>
+                        <option value="tinggi">SHM Tinggi (≥ 75%)</option>
+                        <option value="sedang">SHM Sedang (50% – 74%)</option>
+                        <option value="rendah">Belum SHM (&lt; 50%)</option>
+                    </select>
+                </div>
+                <div class="text-[11px] font-semibold text-slate-500 flex items-center gap-1.5">
+                    <span>Menampilkan:</span>
+                    <span id="tabular-row-count" class="font-bold text-slate-900 font-mono bg-white px-2 py-0.5 rounded border border-slate-200">{{ $totalKawasan }}</span>
+                    <span>kawasan</span>
+                </div>
+            </div>
+
             <!-- Table Responsive Container -->
             <div class="flex-1 overflow-auto p-4">
-                <div class="bg-white rounded-lg shadow-xs border border-slate-300 overflow-hidden">
+                <div class="bg-white rounded-xl shadow-xs border border-slate-200 overflow-hidden">
                     <table class="w-full text-left border-collapse text-xs">
                         <thead class="bg-[#081e36] text-white text-[11px] font-bold uppercase tracking-wider border-b-2 border-slate-700">
-                            <tr class="divide-x divide-slate-200">
+                            <tr class="divide-x divide-slate-700/60">
                                 <th class="py-3 px-3 text-center w-12 font-bold text-slate-200">No</th>
                                 <th class="py-3 px-3.5 font-bold text-slate-200">Nama Kawasan</th>
                                 <th class="py-3 px-3.5 font-bold text-slate-200">Kabupaten</th>
                                 <th class="py-3 px-3.5 font-bold text-slate-200">Kecamatan & Desa</th>
                                 <th class="py-3 px-3 text-center w-16 font-bold text-slate-200">Tahun</th>
-                                <th class="py-3 px-3.5 text-right font-bold text-slate-700">Jml Penduduk</th>
-                                <th class="py-3 px-3.5 text-right font-bold text-slate-700">Sudah SHM</th>
-                                <th class="py-3 px-3.5 text-right font-bold text-slate-700">Belum SHM</th>
+                                <th class="py-3 px-3.5 text-right font-bold text-slate-200">Jml Penduduk</th>
+                                <th class="py-3 px-3.5 text-right font-bold text-slate-200">Sudah SHM</th>
+                                <th class="py-3 px-3.5 text-right font-bold text-slate-200">Belum SHM</th>
                                 <th class="py-3 px-3 text-center w-24 font-bold text-slate-200">% SHM</th>
-                                <th class="py-3 px-3.5 text-right font-bold text-slate-700">Total Luas</th>
+                                <th class="py-3 px-3.5 text-right font-bold text-slate-200">Total Luas</th>
                                 <th class="py-3 px-3.5 font-bold text-slate-200">Status</th>
-                                <th class="py-3 px-3 text-center w-28 font-bold text-slate-200">Aksi</th>
+                                <th class="py-3 px-3 text-center w-32 font-bold text-slate-200">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200 text-slate-700">
                             @foreach ($allKawasan as $idx => $k)
                                 @php
-                                    $shmBadge = $k->persentase_shm >= 75 ? 'bg-blue-50 text-blue-700 border-blue-300' : ($k->persentase_shm >= 50 ? 'bg-amber-50 text-amber-900 border-amber-300' : 'bg-rose-50 text-rose-800 border-rose-300');
+                                    $shmBadge = $k->persentase_shm >= 75 ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : ($k->persentase_shm >= 50 ? 'bg-amber-50 text-amber-800 border-amber-200' : 'bg-rose-50 text-rose-800 border-rose-200');
                                 @endphp
-                                <tr class="odd:bg-white even:bg-slate-50/70 hover:bg-blue-50/50 transition-colors divide-x divide-slate-200">
+                                <tr class="odd:bg-white even:bg-slate-50/70 hover:bg-blue-50/50 transition-colors divide-x divide-slate-200"
+                                    data-nama="{{ strtolower($k->nama) }}"
+                                    data-kabupaten="{{ strtolower($k->kabupaten) }}"
+                                    data-kecamatan="{{ strtolower($k->kecamatan) }}"
+                                    data-desa="{{ strtolower($k->desa) }}"
+                                    data-shm="{{ $k->persentase_shm }}">
                                     <td class="py-2.5 px-3 text-center font-mono text-slate-500 font-semibold">{{ $idx + 1 }}</td>
                                     <td class="py-2.5 px-3.5">
                                         <strong class="font-bold text-slate-900 block leading-tight">{{ $k->nama }}</strong>
@@ -818,16 +854,16 @@
                                         </span>
                                     </td>
                                     <td class="py-2.5 px-3 text-center">
-                                        <div class="flex items-center justify-center gap-1">
-                                            <button onclick="window.focusKawasanOnMap({{ $k->id }})" class="p-1.5 rounded bg-white hover:bg-[#1a73e8] hover:text-white text-[#1a73e8] border border-slate-300 hover:border-[#1a73e8] transition shadow-2xs cursor-pointer" title="Tampilkan di Peta Spasial">
+                                        <div class="flex items-center justify-center gap-1.5">
+                                            <button onclick="window.focusKawasanOnMap({{ $k->id }})" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-50 hover:bg-[#1a73e8] hover:text-white text-[#1a73e8] border border-blue-200 transition shadow-2xs font-bold text-[11px] cursor-pointer" title="Tampilkan di Peta Spasial & Buka Profil">
                                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                                                <span>Peta & Profil</span>
                                             </button>
-                                            <button onclick="window.openEditModal({{ $k->id }})" class="p-1.5 rounded bg-white hover:bg-yellow-400 hover:text-blue-600 text-yellow-800 border border-slate-300 hover:border-yellow-400 transition shadow-2xs cursor-pointer" title="Edit Data">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                                            </button>
-                                            <button onclick="window.deleteKawasan({{ $k->id }}, '{{ addslashes($k->nama) }}')" class="p-1.5 rounded bg-white hover:bg-rose-600 hover:text-white text-rose-600 border border-slate-300 hover:border-rose-600 transition shadow-2xs cursor-pointer" title="Hapus Kawasan">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                                            </button>
+                                            @auth
+                                                <button onclick="window.openEditModal({{ $k->id }})" class="p-1.5 rounded-lg bg-slate-100 hover:bg-yellow-400 hover:text-slate-950 text-slate-600 border border-slate-300 transition shadow-2xs cursor-pointer" title="Edit Data (Aparatur)">
+                                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                                </button>
+                                            @endauth
                                         </div>
                                     </td>
                                 </tr>
@@ -962,62 +998,141 @@
 
         <!-- ==================== VIEW 4: SARANA PENDUKUNG ==================== -->
         <div id="view-pendukung" class="h-full w-full bg-gray-50 flex flex-col overflow-y-auto hidden p-5 sm:p-6 space-y-6">
-            <div>
-                <h2 class="text-xl font-bold text-gray-900 tracking-tight">Katalog Infrastruktur & Sarana Pendukung</h2>
-                <p class="text-xs text-gray-500 mt-0.5">Kondisi fasilitas kesehatan, pendidikan, akses air bersih, elektrifikasi PLN, dan aksesibilitas jalan di 11 permukiman transmigrasi</p>
+            <!-- Header Section with Title & Search/Filter Toolbar -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-900 tracking-tight flex items-center gap-2">
+                        <span>Katalog Infrastruktur & Sarana Pendukung</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-semibold">{{ $totalKawasan }} Kawasan</span>
+                    </h2>
+                    <p class="text-xs text-gray-500 mt-0.5">Kondisi fasilitas kesehatan, pendidikan, akses air bersih, elektrifikasi PLN, dan aksesibilitas jalan di {{ $totalKawasan }} permukiman transmigrasi</p>
+                </div>
+                
+                <!-- Live Search and Filter for Sarana Pendukung -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <div class="relative min-w-[220px]">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </div>
+                        <input type="text" id="pendukung-search-input" placeholder="Cari sarana, puskesmas, SD, jalan..." 
+                            class="w-full pl-9 pr-3 py-1.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] transition-all">
+                    </div>
+                    <select id="pendukung-filter-kabupaten" class="py-1.5 px-3 rounded-xl bg-white border border-slate-300 text-xs text-slate-700 font-medium focus:outline-none focus:ring-2 focus:ring-[#1a73e8] transition-all cursor-pointer">
+                        <option value="all">Semua Kabupaten</option>
+                        <option value="Boalemo">Kab. Boalemo</option>
+                        <option value="Gorontalo">Kab. Gorontalo</option>
+                        <option value="Gorontalo Utara">Kab. Gorontalo Utara</option>
+                        <option value="Pohuwato">Kab. Pohuwato</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="pendukung-cards-grid">
                 @foreach ($allKawasan as $item)
-                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
-                                {{ $item->tipe }} • {{ str_replace('Kabupaten ', '', $item->kabupaten) }}
-                            </span>
-                            <span class="text-xs font-mono font-bold text-yellow-700">{{ $item->persentase_shm }}% SHM</span>
-                        </div>
-                        <h4 class="font-bold text-sm text-gray-900 leading-snug">{{ $item->nama }}</h4>
-                        <p class="text-xs text-gray-500">Kec. {{ $item->kecamatan }}, Desa {{ $item->desa }}</p>
+                    @php
+                        $shmCardBadge = $item->persentase_shm >= 75 ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : ($item->persentase_shm >= 50 ? 'bg-amber-50 text-amber-800 border-amber-200' : 'bg-rose-50 text-rose-800 border-rose-200');
+                    @endphp
+                    <div class="pendukung-card bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between"
+                        data-nama="{{ strtolower($item->nama) }}"
+                        data-kabupaten="{{ strtolower($item->kabupaten) }}"
+                        data-fasilitas="{{ strtolower(json_encode($item->sarana_prasarana ?? [])) }}">
+                        <div>
+                            <!-- Card Header -->
+                            <div class="flex items-center justify-between gap-2 mb-2">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200/80">
+                                    {{ $item->tipe }} • {{ str_replace('Kabupaten ', '', $item->kabupaten) }}
+                                </span>
+                                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border {{ $shmCardBadge }}">
+                                    {{ $item->persentase_shm }}% SHM
+                                </span>
+                            </div>
+                            
+                            <h4 class="font-bold text-sm text-slate-900 leading-snug mb-0.5">
+                                {{ $item->nama }}
+                            </h4>
+                            <p class="text-[11px] text-slate-500 mb-3">
+                                Kec. {{ $item->kecamatan }}, Desa {{ $item->desa }}
+                            </p>
 
-                        <div class="space-y-2 pt-2 border-t border-gray-100 text-xs">
-                            @if (!empty($item->sarana_prasarana) && is_array($item->sarana_prasarana))
-                                @if (isset($item->sarana_prasarana['kesehatan']))
-                                    <div class="flex items-start gap-2">
-                                        <span class="text-gray-400 font-semibold text-[11px] w-20 shrink-0">Kesehatan:</span>
-                                        <span class="text-gray-700">{{ $item->sarana_prasarana['kesehatan'] }}</span>
+                            <!-- Facility Details with Dedicated Icons -->
+                            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs">
+                                <!-- Kesehatan -->
+                                <div class="flex items-start gap-2.5">
+                                    <div class="w-6 h-6 rounded-lg bg-rose-50 text-rose-600 border border-rose-200/60 flex items-center justify-center shrink-0 mt-0.5" title="Fasilitas Kesehatan">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                                     </div>
-                                @endif
-                                @if (isset($item->sarana_prasarana['pendidikan']))
-                                    <div class="flex items-start gap-2">
-                                        <span class="text-gray-400 font-semibold text-[11px] w-20 shrink-0">Pendidikan:</span>
-                                        <span class="text-gray-700">{{ $item->sarana_prasarana['pendidikan'] }}</span>
+                                    <div class="min-w-0 flex-1">
+                                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Kesehatan</span>
+                                        <p class="text-[11px] text-slate-700 leading-relaxed font-medium">
+                                            {{ $item->sarana_prasarana['kesehatan'] ?? 'Dalam pendataan dinas' }}
+                                        </p>
                                     </div>
-                                @endif
-                                @if (isset($item->sarana_prasarana['air_bersih']))
-                                    <div class="flex items-start gap-2">
-                                        <span class="text-gray-400 font-semibold text-[11px] w-20 shrink-0">Air Bersih:</span>
-                                        <span class="text-gray-700">{{ $item->sarana_prasarana['air_bersih'] }}</span>
+                                </div>
+
+                                <!-- Pendidikan -->
+                                <div class="flex items-start gap-2.5">
+                                    <div class="w-6 h-6 rounded-lg bg-blue-50 text-blue-600 border border-blue-200/60 flex items-center justify-center shrink-0 mt-0.5" title="Fasilitas Pendidikan">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg>
                                     </div>
-                                @endif
-                                @if (isset($item->sarana_prasarana['listrik']))
-                                    <div class="flex items-start gap-2">
-                                        <span class="text-gray-400 font-semibold text-[11px] w-20 shrink-0">Listrik:</span>
-                                        <span class="text-gray-700">{{ $item->sarana_prasarana['listrik'] }}</span>
+                                    <div class="min-w-0 flex-1">
+                                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Pendidikan</span>
+                                        <p class="text-[11px] text-slate-700 leading-relaxed font-medium">
+                                            {{ $item->sarana_prasarana['pendidikan'] ?? 'Dalam pendataan dinas' }}
+                                        </p>
                                     </div>
-                                @endif
-                                @if (isset($item->sarana_prasarana['akses_jalan']))
-                                    <div class="flex items-start gap-2">
-                                        <span class="text-gray-400 font-semibold text-[11px] w-20 shrink-0">Jalan:</span>
-                                        <span class="text-gray-700">{{ $item->sarana_prasarana['akses_jalan'] }}</span>
+                                </div>
+
+                                <!-- Air Bersih -->
+                                <div class="flex items-start gap-2.5">
+                                    <div class="w-6 h-6 rounded-lg bg-cyan-50 text-cyan-600 border border-cyan-200/60 flex items-center justify-center shrink-0 mt-0.5" title="Air Bersih">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
                                     </div>
-                                @endif
-                            @endif
+                                    <div class="min-w-0 flex-1">
+                                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Air Bersih</span>
+                                        <p class="text-[11px] text-slate-700 leading-relaxed font-medium">
+                                            {{ $item->sarana_prasarana['air_bersih'] ?? 'Dalam pendataan dinas' }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Listrik -->
+                                <div class="flex items-start gap-2.5">
+                                    <div class="w-6 h-6 rounded-lg bg-amber-50 text-amber-600 border border-amber-200/60 flex items-center justify-center shrink-0 mt-0.5" title="Elektrifikasi Listrik">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Elektrifikasi Listrik</span>
+                                        <p class="text-[11px] text-slate-700 leading-relaxed font-medium">
+                                            {{ $item->sarana_prasarana['listrik'] ?? 'Dalam pendataan dinas' }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Akses Jalan -->
+                                <div class="flex items-start gap-2.5">
+                                    <div class="w-6 h-6 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200/60 flex items-center justify-center shrink-0 mt-0.5" title="Aksesibilitas Jalan">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Akses Jalan</span>
+                                        <p class="text-[11px] text-slate-700 leading-relaxed font-medium">
+                                            {{ $item->sarana_prasarana['akses_jalan'] ?? 'Dalam pendataan dinas' }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="pt-2 flex justify-end">
-                            <button onclick="window.focusKawasanOnMap({{ $item->id }})" class="px-3.5 py-1.5 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold shadow-xs transition cursor-pointer">
-                                Tinjau di Peta
-                            </button>
+                        <!-- Card Footer -->
+                        <div class="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                            <span class="text-[11px] font-mono font-semibold text-slate-500">{{ number_format($item->jumlah_kk) }} KK</span>
+                            <div class="flex items-center gap-1.5">
+                                <button onclick="window.focusKawasanOnMap({{ $item->id }})" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-yellow-500 hover:bg-yellow-400 active:scale-95 text-slate-950 text-xs font-bold shadow-2xs transition cursor-pointer">
+                                    <span>Tinjau di Peta</span>
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -1293,6 +1408,77 @@
             const timeEl = document.getElementById('current-time-badge');
             if (timeEl) timeEl.textContent = `${hours}:${minutes} WITA`;
         }, 1000);
+
+        // Tabular View Real-time Search & Filter
+        const tabSearch = document.getElementById('tabular-search-input');
+        const tabKabFilter = document.getElementById('tabular-filter-kabupaten');
+        const tabShmFilter = document.getElementById('tabular-filter-shm');
+        const tabRowCount = document.getElementById('tabular-row-count');
+
+        function filterTabularRows() {
+            const searchVal = (tabSearch?.value || '').toLowerCase().trim();
+            const kabVal = tabKabFilter?.value || 'all';
+            const shmVal = tabShmFilter?.value || 'all';
+
+            const rows = document.querySelectorAll('#view-tabular tbody tr');
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const nama = (row.dataset.nama || '').toLowerCase();
+                const kab = (row.dataset.kabupaten || '').toLowerCase();
+                const kec = (row.dataset.kecamatan || '').toLowerCase();
+                const desa = (row.dataset.desa || '').toLowerCase();
+                const shm = parseFloat(row.dataset.shm || '0');
+
+                let matchSearch = !searchVal || nama.includes(searchVal) || kab.includes(searchVal) || kec.includes(searchVal) || desa.includes(searchVal);
+                let matchKab = (kabVal === 'all') || kab.includes(kabVal.toLowerCase());
+                let matchShm = true;
+                if (shmVal === 'tinggi') matchShm = shm >= 75;
+                else if (shmVal === 'sedang') matchShm = shm >= 50 && shm < 75;
+                else if (shmVal === 'rendah') matchShm = shm < 50;
+
+                if (matchSearch && matchKab && matchShm) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            if (tabRowCount) tabRowCount.textContent = visibleCount;
+        }
+
+        tabSearch?.addEventListener('input', filterTabularRows);
+        tabKabFilter?.addEventListener('change', filterTabularRows);
+        tabShmFilter?.addEventListener('change', filterTabularRows);
+
+        // Sarana Pendukung Real-time Search & Filter
+        const pendSearch = document.getElementById('pendukung-search-input');
+        const pendKabFilter = document.getElementById('pendukung-filter-kabupaten');
+
+        function filterPendukungCards() {
+            const searchVal = (pendSearch?.value || '').toLowerCase().trim();
+            const kabVal = pendKabFilter?.value || 'all';
+
+            const cards = document.querySelectorAll('.pendukung-card');
+            cards.forEach(card => {
+                const nama = (card.dataset.nama || '').toLowerCase();
+                const kab = (card.dataset.kabupaten || '').toLowerCase();
+                const fasilitas = (card.dataset.fasilitas || '').toLowerCase();
+
+                let matchSearch = !searchVal || nama.includes(searchVal) || kab.includes(searchVal) || fasilitas.includes(searchVal);
+                let matchKab = (kabVal === 'all') || kab.includes(kabVal.toLowerCase());
+
+                if (matchSearch && matchKab) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        pendSearch?.addEventListener('input', filterPendukungCards);
+        pendKabFilter?.addEventListener('change', filterPendukungCards);
     </script>
 </body>
 </html>
