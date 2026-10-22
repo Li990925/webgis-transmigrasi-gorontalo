@@ -200,4 +200,83 @@ class KawasanTransmigrasiTest extends TestCase
             'id' => $item->id,
         ]);
     }
+
+    /**
+     * Test creating and updating kawasan with breakdown lahan, target bidang SHM, tahapan BPN, and program pemberdayaan.
+     */
+    public function test_can_create_and_update_kawasan_with_breakdown_bpn_and_pemberdayaan(): void
+    {
+        $payload = [
+            'nama' => 'UPT Inovasi Baru 2026',
+            'tipe' => 'UPT',
+            'kabupaten' => 'Kabupaten Boalemo',
+            'kecamatan' => 'Wonosari',
+            'desa' => 'Desa Makmur',
+            'tahun_penempatan' => 2024,
+            'jumlah_kk' => 200,
+            'jumlah_jiwa' => 800,
+            'kk_shm' => 120,
+            'kk_non_shm' => 80,
+            'luas_ha' => 1500,
+            'luas_lahan_pekarangan_ha' => 200.5,
+            'luas_lahan_usaha_1_ha' => 750.0,
+            'luas_lahan_usaha_2_ha' => 549.5,
+            'target_bidang_shm' => 300,
+            'bidang_shm_terbit' => 120,
+            'bidang_shm_proses' => 180,
+            'tahapan_shm' => 'Tahap Pengukuran & Sidang PBT',
+            'program_pemberdayaan' => [
+                'Bimtek Budidaya & Pasca Panen',
+                'Bantuan Saprotan & Alsintan',
+                'Kelompok Usaha Bersama (KUBE)',
+            ],
+            'program_pemberdayaan_custom' => 'Pelatihan Vokasi UMKM',
+            'jumlah_kegiatan_pemberdayaan' => 18,
+            'latitude' => 0.5520,
+            'longitude' => 122.3520,
+        ];
+
+        $response = $this->postJson('/kawasan', $payload);
+
+        $response->assertStatus(201);
+        $response->assertJsonPath('success', true);
+        $createdId = $response->json('data.id');
+
+        $this->assertDatabaseHas('kawasan_transmigrasis', [
+            'id' => $createdId,
+            'nama' => 'UPT Inovasi Baru 2026',
+            'target_bidang_shm' => 300,
+            'bidang_shm_terbit' => 120,
+            'bidang_shm_proses' => 180,
+            'tahapan_shm' => 'Tahap Pengukuran & Sidang PBT',
+            'jumlah_kegiatan_pemberdayaan' => 18,
+        ]);
+
+        $item = KawasanTransmigrasi::findOrFail($createdId);
+        $this->assertEquals(200.5, (float) $item->luas_lahan_pekarangan_ha);
+        $this->assertEquals(750.0, (float) $item->luas_lahan_usaha_1_ha);
+        $this->assertEquals(549.5, (float) $item->luas_lahan_usaha_2_ha);
+        $this->assertContains('Pelatihan Vokasi UMKM', $item->program_pemberdayaan);
+
+        // Update the newly created item
+        $updatePayload = [
+            'nama' => 'UPT Inovasi Baru Terupdate',
+            'bidang_shm_terbit' => 200,
+            'bidang_shm_proses' => 100,
+            'tahapan_shm' => 'Tahap Penerbitan SK Hak Milik (BPN)',
+            'jumlah_kegiatan_pemberdayaan' => 22,
+        ];
+
+        $updateResponse = $this->putJson("/kawasan/{$createdId}", $updatePayload);
+        $updateResponse->assertStatus(200);
+
+        $this->assertDatabaseHas('kawasan_transmigrasis', [
+            'id' => $createdId,
+            'nama' => 'UPT Inovasi Baru Terupdate',
+            'bidang_shm_terbit' => 200,
+            'bidang_shm_proses' => 100,
+            'tahapan_shm' => 'Tahap Penerbitan SK Hak Milik (BPN)',
+            'jumlah_kegiatan_pemberdayaan' => 22,
+        ]);
+    }
 }

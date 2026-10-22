@@ -153,10 +153,160 @@
             </div>
         </div>
 
-        <!-- Section 3: Koordinat Spasial PostGIS -->
+        <!-- Section 3: Rincian Alokasi Lahan Transmigrasi (LU I, LU II & Pekarangan) -->
+        <div class="p-6 rounded-xl bg-white border border-gray-200 shadow-sm space-y-4">
+            <div class="border-b border-gray-200 pb-3">
+                <h2 class="text-sm font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-extrabold">3</span>
+                    Rincian Alokasi Lahan Transmigrasi (Hektar)
+                </h2>
+                <p class="text-[11px] text-gray-500 mt-1">Pembagian hak lahan warga transmigrasi (Lahan Pekarangan, Lahan Usaha I, dan Lahan Usaha II) sesuai SK Hak Pengelolaan Lahan (HPL).</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">Lahan Pekarangan (LP) (Ha)</label>
+                    <input type="number" step="0.01" name="luas_lahan_pekarangan_ha" id="input_lp_ha" value="{{ old('luas_lahan_pekarangan_ha', $kawasanTransmigrasi->luas_lahan_pekarangan_ha ?? 0) }}" min="0" placeholder="Contoh: 125.00"
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
+                    <span class="text-[10px] text-gray-400 mt-1 block">Tapak pemukiman & pekarangan keluarga.</span>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">Lahan Usaha I (LU I) (Ha)</label>
+                    <input type="number" step="0.01" name="luas_lahan_usaha_1_ha" id="input_lu1_ha" value="{{ old('luas_lahan_usaha_1_ha', $kawasanTransmigrasi->luas_lahan_usaha_1_ha ?? 0) }}" min="0" placeholder="Contoh: 350.50"
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
+                    <span class="text-[10px] text-gray-400 mt-1 block">Lahan pertanian/tanaman pangan utama.</span>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">Lahan Usaha II (LU II) (Ha)</label>
+                    <input type="number" step="0.01" name="luas_lahan_usaha_2_ha" id="input_lu2_ha" value="{{ old('luas_lahan_usaha_2_ha', $kawasanTransmigrasi->luas_lahan_usaha_2_ha ?? 0) }}" min="0" placeholder="Contoh: 240.00"
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
+                    <span class="text-[10px] text-gray-400 mt-1 block">Lahan perkebunan/pengembangan lanjutan.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Target & Tahapan Sertifikasi Bidang Tanah (ATR/BPN) -->
+        <div class="p-6 rounded-xl bg-white border border-gray-200 shadow-sm space-y-4">
+            <div class="border-b border-gray-200 pb-3">
+                <h2 class="text-sm font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-indigo-100 text-indigo-800 flex items-center justify-center text-xs font-extrabold">4</span>
+                    Target & Tahapan Sertifikasi Bidang Hak Milik (ATR/BPN)
+                </h2>
+                <p class="text-[11px] text-gray-500 mt-1">Pemantauan target sertifikasi bidang tanah dan progres tahapan legalitas di Kantor Pertanahan ATR/BPN.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">Target Total Bidang SHM</label>
+                    <input type="number" name="target_bidang_shm" id="input_target_bidang" value="{{ old('target_bidang_shm', $kawasanTransmigrasi->target_bidang_shm ?? 0) }}" min="0" placeholder="Contoh: 4150"
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
+                    <span class="text-[10px] text-gray-400 mt-1 block">Total kuota bidang target sertifikasi.</span>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">Realisasi SHM Terbit (Bidang)</label>
+                    <input type="number" name="bidang_shm_terbit" id="input_bidang_terbit" value="{{ old('bidang_shm_terbit', $kawasanTransmigrasi->bidang_shm_terbit ?? 0) }}" min="0" placeholder="Contoh: 2864"
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
+                    <span class="text-[10px] text-emerald-600 font-semibold mt-1 block">Sertifikat telah terbit resmi dari BPN.</span>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">Bidang SHM Masih Proses</label>
+                    <input type="number" name="bidang_shm_proses" id="input_bidang_proses" value="{{ old('bidang_shm_proses', $kawasanTransmigrasi->bidang_shm_proses ?? 0) }}" min="0" placeholder="Contoh: 1286"
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
+                    <span class="text-[10px] text-amber-600 font-semibold mt-1 block">Dalam proses pengukuran / sidang pertanahan.</span>
+                </div>
+            </div>
+
+            <div class="text-xs pt-1">
+                <label class="block font-semibold text-gray-700 mb-1">Tahapan Proses / Kendala Sertifikasi Saat Ini</label>
+                @php
+                    $tahapanOptions = [
+                        'Tahap Pengukuran & Sidang PBT',
+                        'Tahap Inventarisasi Subjek & Objek',
+                        'Tahap Penerbitan SK Hak Milik (BPN)',
+                        'Kendala Tumpang Tindih Kawasan Hutan',
+                        'Selesai Sertifikasi 100%'
+                    ];
+                    $currentTahapan = old('tahapan_shm', $kawasanTransmigrasi->tahapan_shm);
+                    $isStandardTahapan = in_array($currentTahapan, $tahapanOptions);
+                @endphp
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <select name="tahapan_shm" id="select_tahapan_shm" class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
+                        <option value="">-- Pilih Tahapan ATR/BPN atau Masukkan Kustom --</option>
+                        @foreach($tahapanOptions as $opt)
+                            <option value="{{ $opt }}" {{ $currentTahapan === $opt ? 'selected' : '' }}>{{ $opt }}</option>
+                        @endforeach
+                    </select>
+                    <input type="text" name="tahapan_shm_custom" id="input_tahapan_custom" placeholder="Atau ketik keterangan tahapan/kendala spesifik..."
+                        value="{{ old('tahapan_shm_custom', $isStandardTahapan ? '' : $currentTahapan) }}"
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
+                </div>
+                <span class="text-[10px] text-gray-400 mt-1 block">Catatan status tahapan ini akan muncul pada kartu indikator sertifikasi eksekutif dashboard.</span>
+            </div>
+        </div>
+
+        <!-- Section 5: Program Pemberdayaan Ekonomi Transmigrasi -->
+        <div class="p-6 rounded-xl bg-white border border-gray-200 shadow-sm space-y-4">
+            <div class="border-b border-gray-200 pb-3">
+                <h2 class="text-sm font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center text-xs font-extrabold">5</span>
+                    Program Pemberdayaan Ekonomi & Bantuan Usaha
+                </h2>
+                <p class="text-[11px] text-gray-500 mt-1">Intervensi stimulan usaha tani, peningkatan kompetensi transmigran, dan penguatan lembaga ekonomi desa.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">Jumlah Kegiatan Pemberdayaan</label>
+                    <input type="number" name="jumlah_kegiatan_pemberdayaan" id="input_kegiatan_pemberdayaan" value="{{ old('jumlah_kegiatan_pemberdayaan', $kawasanTransmigrasi->jumlah_kegiatan_pemberdayaan ?? 0) }}" min="0" placeholder="Contoh: 24"
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
+                    <span class="text-[10px] text-gray-400 mt-1 block">Akumulasi paket pelatihan/bantuan yang disalurkan.</span>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label class="block font-semibold text-gray-700 mb-1.5">Jenis Program Pemberdayaan (Centang yang sesuai)</label>
+                    @php
+                        $defaultPrograms = [
+                            'Bimtek Budidaya & Pasca Panen',
+                            'Bantuan Saprotan & Alsintan',
+                            'Kelompok Usaha Bersama (KUBE)',
+                            'Pelatihan Vokasi & Keterampilan',
+                            'Kemitraan Usaha & Akses Pasar'
+                        ];
+                        $savedProg = is_array($kawasanTransmigrasi->program_pemberdayaan) ? $kawasanTransmigrasi->program_pemberdayaan : [];
+                        $currentProg = old('program_pemberdayaan', $savedProg);
+                        if (!is_array($currentProg)) {
+                            $currentProg = explode(',', $currentProg);
+                        }
+                        $customPrograms = array_diff($currentProg, $defaultPrograms);
+                    @endphp
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        @foreach($defaultPrograms as $prog)
+                            <label class="flex items-center gap-2 p-2 rounded-lg border border-gray-200 bg-gray-50 hover:bg-gray-100 cursor-pointer text-[11px] transition-colors">
+                                <input type="checkbox" name="program_pemberdayaan[]" value="{{ $prog }}"
+                                    {{ in_array($prog, $currentProg) ? 'checked' : '' }}
+                                    class="w-4 h-4 rounded text-[#1a73e8] focus:ring-[#1a73e8] border-gray-300">
+                                <span class="text-gray-800 font-medium">{{ $prog }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-xs pt-1">
+                <label class="block font-semibold text-gray-700 mb-1">Program Tambahan Lainnya (Opsional)</label>
+                <input type="text" name="program_pemberdayaan_custom" value="{{ old('program_pemberdayaan_custom', implode(', ', $customPrograms)) }}" placeholder="Contoh: Pelatihan Digital Marketing UMKM, Bantuan Ternak Sapi (pisahkan koma jika lebih dari satu)"
+                    class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
+            </div>
+        </div>
+
+        <!-- Section 6: Koordinat Spasial PostGIS -->
         <div class="p-6 rounded-xl bg-white border border-gray-200 shadow-sm space-y-4">
             <h2 class="text-sm font-bold text-gray-800 flex items-center gap-2 border-b border-gray-100 pb-3">
-                <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-900 flex items-center justify-center text-xs font-extrabold">3</span>
+                <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-900 flex items-center justify-center text-xs font-extrabold">6</span>
                 Koordinat Titik Spasial (PostGIS Point SRID 4326)
             </h2>
 
@@ -220,6 +370,50 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     kkInput?.addEventListener('input', syncShm);
     shmInput?.addEventListener('input', syncShm);
+
+    // Auto sync Bidang SHM (Target - Terbit = Proses)
+    const targetBidangInput = document.getElementById('input_target_bidang');
+    const bidangTerbitInput = document.getElementById('input_bidang_terbit');
+    const bidangProsesInput = document.getElementById('input_bidang_proses');
+
+    function syncBidang() {
+        if (!targetBidangInput || !bidangTerbitInput || !bidangProsesInput) return;
+        const target = parseInt(targetBidangInput.value) || 0;
+        const terbit = parseInt(bidangTerbitInput.value) || 0;
+        if (target >= terbit) {
+            bidangProsesInput.value = target - terbit;
+        }
+    }
+    targetBidangInput?.addEventListener('input', syncBidang);
+    bidangTerbitInput?.addEventListener('input', syncBidang);
+
+    // Tahapan ATR/BPN select vs custom input sync
+    const selectTahapan = document.getElementById('select_tahapan_shm');
+    const inputTahapanCustom = document.getElementById('input_tahapan_custom');
+    selectTahapan?.addEventListener('change', function() {
+        if (this.value) {
+            inputTahapanCustom.value = '';
+        }
+    });
+    inputTahapanCustom?.addEventListener('input', function() {
+        if (this.value) {
+            selectTahapan.value = '';
+        }
+    });
+
+    // Auto count selected pemberdayaan programs if kegiatan is 0
+    const progCheckboxes = document.querySelectorAll('input[name="program_pemberdayaan[]"]');
+    const kegiatanInput = document.getElementById('input_kegiatan_pemberdayaan');
+    progCheckboxes.forEach(cb => {
+        cb.addEventListener('change', function() {
+            if (kegiatanInput && (parseInt(kegiatanInput.value) || 0) === 0) {
+                const count = document.querySelectorAll('input[name="program_pemberdayaan[]"]:checked').length;
+                if (count > 0) {
+                    kegiatanInput.value = count;
+                }
+            }
+        });
+    });
 
     // Mini Map Picker
     const initLat = parseFloat(latInput.value) || 0.65;

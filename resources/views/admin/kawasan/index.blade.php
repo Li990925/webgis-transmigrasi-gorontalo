@@ -120,6 +120,18 @@
                                 <div class="text-[11px] text-gray-500 mt-0.5">
                                     Desa {{ $item->desa }}, Kec. {{ $item->kecamatan }} &bull; Thn {{ $item->tahun_penempatan }}
                                 </div>
+                                @if(!empty($item->program_pemberdayaan) && count($item->program_pemberdayaan) > 0)
+                                    <div class="flex items-center gap-1 mt-1.5 flex-wrap">
+                                        @foreach(array_slice($item->program_pemberdayaan, 0, 2) as $prog)
+                                            <span class="px-1.5 py-0.5 rounded text-[9px] bg-teal-50 text-teal-800 border border-teal-200 font-medium">
+                                                {{ $prog }}
+                                            </span>
+                                        @endforeach
+                                        @if(count($item->program_pemberdayaan) > 2)
+                                            <span class="text-[9px] text-teal-700 font-bold">+{{ count($item->program_pemberdayaan) - 2 }}</span>
+                                        @endif
+                                    </div>
+                                @endif
                             </td>
 
                             <td class="py-3 px-3.5 whitespace-nowrap">
@@ -145,10 +157,25 @@
                                 <div class="text-[10px] font-bold mt-1 {{ $item->persentase_shm >= 75 ? 'text-blue-900' : ($item->persentase_shm >= 50 ? 'text-yellow-700' : 'text-rose-700') }}">
                                     {{ $item->persentase_shm }}% Selesai
                                 </div>
+                                @if($item->target_bidang_shm)
+                                    <div class="text-[9px] text-gray-500 font-mono mt-0.5">
+                                        {{ $item->bidang_shm_terbit ?? $item->kk_shm }}/{{ $item->target_bidang_shm }} Bidang
+                                    </div>
+                                @endif
+                                @if($item->tahapan_shm)
+                                    <div class="text-[9px] font-semibold text-indigo-700 truncate max-w-[130px] mx-auto mt-0.5" title="{{ $item->tahapan_shm }}">
+                                        {{ $item->tahapan_shm }}
+                                    </div>
+                                @endif
                             </td>
 
-                            <td class="py-3 px-3.5 text-right font-mono font-bold text-gray-900">
-                                {{ number_format($item->luas_ha, 0) }} Ha
+                            <td class="py-3 px-3.5 text-right font-mono text-gray-900">
+                                <div class="font-bold">{{ number_format($item->luas_ha, 0) }} Ha</div>
+                                @if($item->luas_lahan_pekarangan_ha || $item->luas_lahan_usaha_1_ha || $item->luas_lahan_usaha_2_ha)
+                                    <div class="text-[9px] text-gray-500 font-sans" title="LP: {{ $item->luas_lahan_pekarangan_ha ?? 0 }} Ha | LU I: {{ $item->luas_lahan_usaha_1_ha ?? 0 }} Ha | LU II: {{ $item->luas_lahan_usaha_2_ha ?? 0 }} Ha">
+                                        LP: {{ number_format($item->luas_lahan_pekarangan_ha, 0) }} &bull; LU: {{ number_format(($item->luas_lahan_usaha_1_ha ?? 0) + ($item->luas_lahan_usaha_2_ha ?? 0), 0) }}
+                                    </div>
+                                @endif
                             </td>
 
                             <td class="py-3 px-3.5 text-center">

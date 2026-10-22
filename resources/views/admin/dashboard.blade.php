@@ -101,24 +101,28 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <div class="flex items-baseline gap-1">
-                            <span class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">2.864</span>
+                            <span class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{{ number_format($totalBidangShmTerbit ?? 2864, 0, ',', '.') }}</span>
                             <span class="text-xs font-semibold text-slate-500">Bidang</span>
                         </div>
                     </div>
-                    <!-- Circular Donut Progress 69% -->
+                    <!-- Circular Donut Progress -->
+                    @php
+                        $pctTerbit = $persentaseBidangTerbit ?? 69;
+                        $offsetTerbit = round(100.5 * (1 - ($pctTerbit / 100)), 1);
+                    @endphp
                     <div class="relative w-10 h-10 flex items-center justify-center">
                         <svg class="w-10 h-10 transform -rotate-90">
                             <circle cx="20" cy="20" r="16" stroke="#dbeafe" stroke-width="3.5" fill="transparent"/>
                             <circle cx="20" cy="20" r="16" stroke="#1a73e8" stroke-width="3.5" fill="transparent"
-                                stroke-dasharray="100.5" stroke-dashoffset="31.1" stroke-linecap="round"/>
+                                stroke-dasharray="100.5" stroke-dashoffset="{{ $offsetTerbit }}" stroke-linecap="round"/>
                         </svg>
-                        <span class="absolute text-[10px] font-extrabold text-[#1a73e8]">69%</span>
+                        <span class="absolute text-[10px] font-extrabold text-[#1a73e8]">{{ $pctTerbit }}%</span>
                     </div>
                 </div>
             </div>
 
             <div class="mt-2 pt-2 border-t border-slate-100 text-[10px] text-slate-400">
-                dari target 2026 (4.150 bidang)
+                dari target 2026 ({{ number_format($totalTargetBidangShm ?? 4150, 0, ',', '.') }} bidang)
             </div>
         </div>
 
@@ -135,24 +139,28 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <div class="flex items-baseline gap-1">
-                            <span class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">1.286</span>
+                            <span class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{{ number_format($totalBidangShmProses ?? 1286, 0, ',', '.') }}</span>
                             <span class="text-xs font-semibold text-slate-500">Bidang</span>
                         </div>
                     </div>
-                    <!-- Circular Donut Progress 31% -->
+                    <!-- Circular Donut Progress -->
+                    @php
+                        $pctProses = $persentaseBidangProses ?? 31;
+                        $offsetProses = round(100.5 * (1 - ($pctProses / 100)), 1);
+                    @endphp
                     <div class="relative w-10 h-10 flex items-center justify-center">
                         <svg class="w-10 h-10 transform -rotate-90">
                             <circle cx="20" cy="20" r="16" stroke="#fee2e2" stroke-width="3.5" fill="transparent"/>
                             <circle cx="20" cy="20" r="16" stroke="#ef4444" stroke-width="3.5" fill="transparent"
-                                stroke-dasharray="100.5" stroke-dashoffset="69.3" stroke-linecap="round"/>
+                                stroke-dasharray="100.5" stroke-dashoffset="{{ $offsetProses }}" stroke-linecap="round"/>
                         </svg>
-                        <span class="absolute text-[10px] font-extrabold text-rose-600">31%</span>
+                        <span class="absolute text-[10px] font-extrabold text-rose-600">{{ $pctProses }}%</span>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-2 pt-2 border-t border-slate-100 text-[10px] text-slate-400">
-                Tahap Pengukuran & Sidang PBT
+            <div class="mt-2 pt-2 border-t border-slate-100 text-[10px] text-slate-400 truncate" title="{{ $dominantTahapan ?? 'Tahap Pengukuran & Sidang PBT' }}">
+                {{ $dominantTahapan ?? 'Tahap Pengukuran & Sidang PBT' }}
             </div>
         </div>
 
@@ -166,7 +174,7 @@
                     <span class="text-[11px] font-bold text-slate-700 leading-tight">Program Pemberdayaan</span>
                 </div>
                 <div class="mt-1 flex items-baseline gap-1.5">
-                    <span class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">24</span>
+                    <span class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{{ number_format($totalKegiatanPemberdayaan ?? 24, 0, ',', '.') }}</span>
                     <span class="text-xs font-semibold text-slate-500">Kegiatan</span>
                 </div>
             </div>

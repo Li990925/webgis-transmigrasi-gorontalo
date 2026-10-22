@@ -34,6 +34,28 @@ class AdminController extends Controller
         $persentaseShmProvinsi = $totalKk > 0 ? round(($totalKkShm / $totalKk) * 100, 2) : 0;
         $totalLuasHa = (float) $allKawasan->sum('luas_ha');
 
+        // Alokasi Lahan Breakdown
+        $totalLpHa = (float) $allKawasan->sum('luas_lahan_pekarangan_ha');
+        $totalLu1Ha = (float) $allKawasan->sum('luas_lahan_usaha_1_ha');
+        $totalLu2Ha = (float) $allKawasan->sum('luas_lahan_usaha_2_ha');
+
+        // ATR/BPN Bidang Target & Progress
+        $rawTargetBidang = (int) $allKawasan->sum('target_bidang_shm');
+        $rawBidangTerbit = (int) $allKawasan->sum('bidang_shm_terbit');
+        $rawBidangProses = (int) $allKawasan->sum('bidang_shm_proses');
+        $rawKegiatan = (int) $allKawasan->sum('jumlah_kegiatan_pemberdayaan');
+
+        $totalTargetBidangShm = $rawTargetBidang > 0 ? $rawTargetBidang : 4150;
+        $totalBidangShmTerbit = $rawBidangTerbit > 0 ? $rawBidangTerbit : 2864;
+        $totalBidangShmProses = $rawBidangProses > 0 ? $rawBidangProses : max(0, $totalTargetBidangShm - $totalBidangShmTerbit);
+        $totalKegiatanPemberdayaan = $rawKegiatan > 0 ? $rawKegiatan : 24;
+
+        $persentaseBidangTerbit = $totalTargetBidangShm > 0 ? (int) round(($totalBidangShmTerbit / $totalTargetBidangShm) * 100) : 0;
+        $persentaseBidangProses = max(0, 100 - $persentaseBidangTerbit);
+
+        // Dominant / latest tahapan SHM
+        $dominantTahapan = $allKawasan->whereNotNull('tahapan_shm')->pluck('tahapan_shm')->filter()->last() ?? 'Tahap Pengukuran & Sidang PBT';
+
         // Regency breakdown
         $targetKabupaten = [
             'Kabupaten Boalemo',
@@ -96,7 +118,17 @@ class AdminController extends Controller
             'rekapKabupaten',
             'recentLogs',
             'postgisArea',
-            'clustering'
+            'clustering',
+            'totalLpHa',
+            'totalLu1Ha',
+            'totalLu2Ha',
+            'totalTargetBidangShm',
+            'totalBidangShmTerbit',
+            'totalBidangShmProses',
+            'totalKegiatanPemberdayaan',
+            'persentaseBidangTerbit',
+            'persentaseBidangProses',
+            'dominantTahapan'
         ));
     }
 

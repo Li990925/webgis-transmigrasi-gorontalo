@@ -453,6 +453,44 @@ class KawasanTransmigrasiSeeder extends Seeder
         ];
 
         foreach ($data as $item) {
+            $kk = (int) ($item['jumlah_kk'] ?? 0);
+            $shm = (int) ($item['kk_shm'] ?? 0);
+            $totalLuas = (float) ($item['luas_ha'] ?? 0);
+
+            if (! isset($item['luas_lahan_pekarangan_ha'])) {
+                $item['luas_lahan_pekarangan_ha'] = round($totalLuas * 0.15, 2);
+            }
+            if (! isset($item['luas_lahan_usaha_1_ha'])) {
+                $item['luas_lahan_usaha_1_ha'] = round($totalLuas * 0.50, 2);
+            }
+            if (! isset($item['luas_lahan_usaha_2_ha'])) {
+                $item['luas_lahan_usaha_2_ha'] = round($totalLuas - $item['luas_lahan_pekarangan_ha'] - $item['luas_lahan_usaha_1_ha'], 2);
+            }
+            if (! isset($item['target_bidang_shm'])) {
+                $item['target_bidang_shm'] = (int) ($kk * 1.5);
+            }
+            if (! isset($item['bidang_shm_terbit'])) {
+                $item['bidang_shm_terbit'] = (int) $shm;
+            }
+            if (! isset($item['bidang_shm_proses'])) {
+                $item['bidang_shm_proses'] = max(0, $item['target_bidang_shm'] - $item['bidang_shm_terbit']);
+            }
+            if (! isset($item['tahapan_shm'])) {
+                $item['tahapan_shm'] = ($item['persentase_shm'] ?? 0) >= 75
+                    ? 'Tahap Penerbitan SK Hak Milik (BPN)'
+                    : 'Tahap Pengukuran & Sidang PBT';
+            }
+            if (! isset($item['program_pemberdayaan'])) {
+                $item['program_pemberdayaan'] = [
+                    'Bimtek Budidaya & Pasca Panen',
+                    'Bantuan Saprotan & Alsintan',
+                    'Kelompok Usaha Bersama (KUBE)',
+                ];
+            }
+            if (! isset($item['jumlah_kegiatan_pemberdayaan'])) {
+                $item['jumlah_kegiatan_pemberdayaan'] = rand(15, 28);
+            }
+
             KawasanTransmigrasi::updateOrCreate(
                 ['slug' => $item['slug']],
                 $item

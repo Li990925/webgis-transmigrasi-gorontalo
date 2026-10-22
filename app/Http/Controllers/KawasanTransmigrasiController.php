@@ -157,6 +157,40 @@ class KawasanTransmigrasiController extends Controller
             $validated['komoditas_unggulan'] = array_values(array_filter(array_map('trim', explode(',', $validated['komoditas_unggulan']))));
         }
 
+        // Handle program pemberdayaan input
+        $programs = [];
+        if (! empty($validated['program_pemberdayaan'])) {
+            if (is_array($validated['program_pemberdayaan'])) {
+                $programs = $validated['program_pemberdayaan'];
+            } elseif (is_string($validated['program_pemberdayaan'])) {
+                $programs = explode(',', $validated['program_pemberdayaan']);
+            }
+        }
+        if (! empty($validated['program_pemberdayaan_custom'])) {
+            $programs = array_merge($programs, explode(',', $validated['program_pemberdayaan_custom']));
+        }
+        if (! empty($programs)) {
+            $validated['program_pemberdayaan'] = array_values(array_unique(array_filter(array_map('trim', $programs))));
+        }
+        unset($validated['program_pemberdayaan_custom']);
+
+        // Handle tahapan SHM custom input
+        if (! empty($validated['tahapan_shm_custom'])) {
+            $validated['tahapan_shm'] = $validated['tahapan_shm_custom'];
+        }
+        unset($validated['tahapan_shm_custom']);
+
+        // Auto calculate default target and status bidang if not supplied
+        if (empty($validated['target_bidang_shm']) && ! empty($validated['jumlah_kk'])) {
+            $validated['target_bidang_shm'] = (int) $validated['jumlah_kk'];
+        }
+        if (empty($validated['bidang_shm_terbit']) && ! empty($validated['kk_shm'])) {
+            $validated['bidang_shm_terbit'] = (int) $validated['kk_shm'];
+        }
+        if (empty($validated['bidang_shm_proses']) && isset($validated['target_bidang_shm'], $validated['bidang_shm_terbit'])) {
+            $validated['bidang_shm_proses'] = max(0, (int) $validated['target_bidang_shm'] - (int) $validated['bidang_shm_terbit']);
+        }
+
         // Auto generate default rectangular polygon around center if none provided
         if (empty($validated['polygon_geojson'])) {
             $lat = (float) $validated['latitude'];
@@ -233,6 +267,27 @@ class KawasanTransmigrasiController extends Controller
         if (isset($validated['komoditas_unggulan']) && is_string($validated['komoditas_unggulan'])) {
             $validated['komoditas_unggulan'] = array_values(array_filter(array_map('trim', explode(',', $validated['komoditas_unggulan']))));
         }
+
+        if (array_key_exists('program_pemberdayaan', $validated) || array_key_exists('program_pemberdayaan_custom', $validated)) {
+            $programs = [];
+            if (! empty($validated['program_pemberdayaan'])) {
+                if (is_array($validated['program_pemberdayaan'])) {
+                    $programs = $validated['program_pemberdayaan'];
+                } elseif (is_string($validated['program_pemberdayaan'])) {
+                    $programs = explode(',', $validated['program_pemberdayaan']);
+                }
+            }
+            if (! empty($validated['program_pemberdayaan_custom'])) {
+                $programs = array_merge($programs, explode(',', $validated['program_pemberdayaan_custom']));
+            }
+            $validated['program_pemberdayaan'] = ! empty($programs) ? array_values(array_unique(array_filter(array_map('trim', $programs)))) : null;
+        }
+        unset($validated['program_pemberdayaan_custom']);
+
+        if (! empty($validated['tahapan_shm_custom'])) {
+            $validated['tahapan_shm'] = $validated['tahapan_shm_custom'];
+        }
+        unset($validated['tahapan_shm_custom']);
 
         $kawasanTransmigrasi->update($validated);
 
