@@ -46,16 +46,20 @@
 
             <!-- Top Left: Provincial Identity & Logo -->
             <div class="relative z-10 flex items-center h-11 mb-4 sm:mb-6 shrink-0">
-                <a href="{{ route('beranda') }}" class="flex items-center gap-3.5 group">
-                    <div class="relative w-11 h-12 rounded-xl overflow-hidden ring-2 ring-yellow-400/90 shadow-lg shadow-yellow-500/20 shrink-0 group-hover:scale-105 transition-transform duration-200 bg-white/10 backdrop-blur-md p-1 flex items-center justify-center">
+                <a href="{{ route('beranda') }}" aria-label="SI-TRANSMIGRASI GORONTALO" class="flex items-center gap-2.5 group">
+                    <span class="sr-only">SI-TRANSMIGRASI GORONTALO</span>
+                    <div class="w-10 h-11 rounded-xl bg-white/10 backdrop-blur-md p-1 border border-white/25 shadow-sm flex items-center justify-center flex-shrink-0 group-hover:border-yellow-400 transition-colors">
                         <img src="/images/logo.png" alt="Lambang Daerah Provinsi Gorontalo" class="w-full h-full object-contain filter drop-shadow">
                     </div>
-                    <div>
-                        <div class="font-extrabold text-base sm:text-lg tracking-tight text-white leading-tight">
-                            SI-TRANSMIGRASI GORONTALO
+                    <div class="leading-tight">
+                        <div class="text-[9px] sm:text-[10px] font-bold tracking-wider text-blue-200 uppercase">
+                            SISTEM INFORMASI
                         </div>
-                        <div class="text-xs text-blue-200/90 font-medium">
-                            Dinas Tenaga Kerja, ESDM dan Transmigrasi Provinsi Gorontalo
+                        <div class="text-sm sm:text-base font-black tracking-wide text-white drop-shadow-xs">
+                            TRANSMIGRASI
+                        </div>
+                        <div class="text-[9px] sm:text-[10px] font-bold tracking-widest text-yellow-300 uppercase">
+                            PROVINSI GORONTALO
                         </div>
                     </div>
                 </a>

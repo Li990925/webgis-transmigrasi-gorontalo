@@ -248,26 +248,20 @@
         <div class="flex items-center justify-between gap-4">
             <!-- Brand & Logo -->
             <div class="flex items-center gap-3">
-                <a href="{{ route('beranda') }}" class="flex items-center gap-3 group">
-                    <div class="w-11 h-12 rounded-xl bg-white/10 backdrop-blur-md p-1 border border-white/30 shadow-sm flex items-center justify-center flex-shrink-0 group-hover:border-yellow-400 transition-colors">
+                <a href="{{ route('beranda') }}" aria-label="SI-TRANSMIGRASI PROVINSI GORONTALO" class="flex items-center gap-2.5 group">
+                    <div class="w-10 h-11 rounded-xl bg-white/10 backdrop-blur-md p-1 border border-white/25 shadow-sm flex items-center justify-center flex-shrink-0 group-hover:border-yellow-400 transition-colors">
                         <img src="/images/logo.png" alt="Lambang Daerah Provinsi Gorontalo" class="w-full h-full object-contain filter drop-shadow">
                     </div>
                     <div class="leading-tight">
-                        <div class="flex items-center gap-2">
-                            <span class="text-[10px] sm:text-[11px] font-bold tracking-wider text-blue-100 uppercase">
-                                SISTEM INFORMASI
-                            </span>
-                            <span class="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[9px] font-semibold bg-yellow-400/20 text-yellow-300 border border-yellow-400/30">
-                                <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
-                                Portal Resmi Pemprov
-                            </span>
+                        <div class="text-[9px] sm:text-[10px] font-bold tracking-wider text-blue-200 uppercase">
+                            SISTEM INFORMASI
                         </div>
                         <h1 class="text-sm sm:text-base font-black tracking-wide text-white drop-shadow-xs">
-                            SI-TRANSMIGRASI <span class="text-yellow-400 font-extrabold">GORONTALO</span>
+                            TRANSMIGRASI
                         </h1>
-                        <p class="text-[9px] sm:text-[10px] font-bold tracking-widest text-yellow-300 uppercase hidden md:block">
-                            Provinsi Gorontalo: Kab. Boalemo, Kab. Pohuwato, Kab. Gorontalo, Kab. Gorontalo Utara
-                        </p>
+                        <div class="text-[9px] sm:text-[10px] font-bold tracking-widest text-yellow-300 uppercase">
+                            PROVINSI GORONTALO
+                        </div>
                     </div>
                 </a>
             </div>
