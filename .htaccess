@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Keamanan: Blokir akses langsung ke file sensitif (.env, .git, dll)
+    <FilesMatch "^\.">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+
+    # Forward semua request ke folder public/ jika DocumentRoot server tidak sengaja mengarah ke root proyek
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

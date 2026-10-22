@@ -1,0 +1,93 @@
+name: Deploy WebGIS Transmigrasi to InfinityFree
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    name: Build Assets & Deploy via FTP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, curl, zip, fileinfo, bcmath
+          tools: composer:v2
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Validate Composer Configuration
+        run: composer validate --strict --no-check-all
+
+      - name: Install Composer Dependencies (Production)
+        run: composer install --no-dev --prefer-dist --optimize-autoloader --no-progress --no-interaction
+
+      - name: Install NPM Dependencies & Build Vite Assets
+        run: |
+          npm ci
+          npm run build
+
+      - name: Verify Build Artifacts
+        run: |
+          test -d public/build || { echo "Error: public/build directory not found after build!"; exit 1; }
+          ls -la public/build/assets/
+
+      - name: Prepare Shared Hosting Directory Structure
+        run: |
+          echo "Membuat struktur isolasi keamanan untuk Shared Hosting..."
+          mkdir -p staging/core staging/htdocs
+
+          # 1. Salin seluruh isi folder public ke staging/htdocs (Web Document Root)
+          cp -r public/* staging/htdocs/
+          cp public/.htaccess staging/htdocs/ 2>/dev/null || true
+
+          # 2. Salin seluruh kode Laravel ke staging/core (Terisolasi di Luar Web Root)
+          rsync -av --exclude='public' \
+                    --exclude='.git' \
+                    --exclude='.github' \
+                    --exclude='node_modules' \
+                    --exclude='tests' \
+                    --exclude='staging' \
+                    --exclude='.env' \
+                    --exclude='.env.*' \
+                    --exclude='*.sql' \
+                    ./ staging/core/
+
+          # 3. Pastikan folder writable storage dan cache tersedia di core
+          mkdir -p staging/core/storage/framework/cache/data
+          mkdir -p staging/core/storage/framework/app/cache
+          mkdir -p staging/core/storage/framework/sessions
+          mkdir -p staging/core/storage/framework/views
+          mkdir -p staging/core/storage/logs
+          touch staging/core/storage/logs/laravel.log
+
+          echo "Struktur staging berhasil disiapkan:"
+          ls -la staging/
+          ls -la staging/htdocs/
+
+      - name: Deploy to InfinityFree via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR || './' }}
+          local-dir: ./staging/
+          dangerous-clean-slate: false
+          timeout: 600000
