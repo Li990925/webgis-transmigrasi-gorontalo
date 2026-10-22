@@ -76,50 +76,75 @@
         </div>
 
         <!-- Middle: Nav Links (Scrollable independently so it never overflows) -->
-        <div class="flex-1 overflow-y-auto py-3 px-3 space-y-1.5">
+        <div class="flex-1 overflow-y-auto py-3 px-3 space-y-1">
             
             <!-- 1. Dashboard Utama -->
             <a href="{{ route('admin.dashboard') }}" 
-                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-yellow-500 text-slate-950 font-bold shadow-md' : 'text-slate-200 hover:bg-white/10 hover:text-white' }}">
-                <svg class="w-4 h-4 flex-shrink-0 {{ request()->routeIs('admin.dashboard') ? 'text-slate-950' : 'text-yellow-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                <span>Dashboard Utama</span>
+                class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all group {{ request()->routeIs('admin.dashboard') ? 'bg-[#1a73e8] text-white sidebar-active-glow font-bold' : 'text-slate-300 hover:bg-white/10 hover:text-white' }}">
+                <div class="flex items-center gap-3">
+                    <svg class="w-4 h-4 flex-shrink-0 {{ request()->routeIs('admin.dashboard') ? 'text-white' : 'text-blue-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    <span>Dashboard Utama</span>
+                </div>
             </a>
 
             <!-- 2. Data Kawasan & Spasial -->
             <a href="{{ route('admin.kawasan.index') }}" 
-                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold transition-all {{ request()->routeIs('admin.kawasan.*') ? 'bg-yellow-500 text-slate-950 font-bold shadow-md' : 'text-slate-200 hover:bg-white/10 hover:text-white' }}">
-                <svg class="w-4 h-4 flex-shrink-0 {{ request()->routeIs('admin.kawasan.*') ? 'text-slate-950' : 'text-yellow-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
-                <span>Data Kawasan & Spasial</span>
+                class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all group {{ request()->routeIs('admin.kawasan.*') ? 'bg-[#1a73e8] text-white sidebar-active-glow font-bold' : 'text-slate-300 hover:bg-white/10 hover:text-white' }}">
+                <div class="flex items-center gap-3">
+                    <svg class="w-4 h-4 flex-shrink-0 {{ request()->routeIs('admin.kawasan.*') ? 'text-white' : 'text-blue-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                    <span>Data Kawasan & Spasial</span>
+                </div>
+                @if(!request()->routeIs('admin.kawasan.*'))
+                <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                @endif
             </a>
 
             <!-- 3. Prioritas ATR/BPN -->
             <a href="{{ route('admin.klasterisasi') }}" 
-                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold transition-all {{ request()->routeIs('admin.klasterisasi') ? 'bg-yellow-500 text-slate-950 font-bold shadow-md' : 'text-slate-200 hover:bg-white/10 hover:text-white' }}">
-                <svg class="w-4 h-4 flex-shrink-0 {{ request()->routeIs('admin.klasterisasi') ? 'text-slate-950' : 'text-yellow-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
-                <span>Prioritas ATR/BPN</span>
+                class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all group {{ request()->routeIs('admin.klasterisasi') ? 'bg-[#1a73e8] text-white sidebar-active-glow font-bold' : 'text-slate-300 hover:bg-white/10 hover:text-white' }}">
+                <div class="flex items-center gap-3">
+                    <svg class="w-4 h-4 flex-shrink-0 {{ request()->routeIs('admin.klasterisasi') ? 'text-white' : 'text-blue-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+                    <span>Prioritas ATR/BPN</span>
+                </div>
+                @if(!request()->routeIs('admin.klasterisasi'))
+                <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                @endif
             </a>
 
             <!-- 4. Log Aktivitas Sistem -->
             <a href="{{ route('admin.audit-logs') }}" 
-                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold transition-all {{ request()->routeIs('admin.audit-logs') ? 'bg-yellow-500 text-slate-950 font-bold shadow-md' : 'text-slate-200 hover:bg-white/10 hover:text-white' }}">
-                <svg class="w-4 h-4 flex-shrink-0 {{ request()->routeIs('admin.audit-logs') ? 'text-slate-950' : 'text-yellow-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                <span>Log Aktivitas Sistem</span>
+                class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all group {{ request()->routeIs('admin.audit-logs') ? 'bg-[#1a73e8] text-white sidebar-active-glow font-bold' : 'text-slate-300 hover:bg-white/10 hover:text-white' }}">
+                <div class="flex items-center gap-3">
+                    <svg class="w-4 h-4 flex-shrink-0 {{ request()->routeIs('admin.audit-logs') ? 'text-white' : 'text-blue-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    <span>Log Aktivitas Sistem</span>
+                </div>
+                @if(!request()->routeIs('admin.audit-logs'))
+                <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                @endif
             </a>
 
             @if(Auth::user()->isSuperAdmin())
             <!-- 5. Kelola Akun Aparatur -->
             <a href="{{ route('admin.users.index') }}" 
-                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold transition-all {{ request()->routeIs('admin.users.*') ? 'bg-yellow-500 text-slate-950 font-bold shadow-md' : 'text-slate-200 hover:bg-white/10 hover:text-white' }}">
-                <svg class="w-4 h-4 flex-shrink-0 {{ request()->routeIs('admin.users.*') ? 'text-slate-950' : 'text-yellow-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                <span>Kelola Akun Aparatur</span>
+                class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all group {{ request()->routeIs('admin.users.*') ? 'bg-[#1a73e8] text-white sidebar-active-glow font-bold' : 'text-slate-300 hover:bg-white/10 hover:text-white' }}">
+                <div class="flex items-center gap-3">
+                    <svg class="w-4 h-4 flex-shrink-0 {{ request()->routeIs('admin.users.*') ? 'text-white' : 'text-blue-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <span>Kelola Akun Aparatur</span>
+                </div>
+                @if(!request()->routeIs('admin.users.*'))
+                <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                @endif
             </a>
             @endif
 
             <!-- 6. Cetak Laporan Resmi -->
             <a href="{{ route('laporan.cetak') }}" target="_blank" 
-                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold transition-all {{ request()->routeIs('laporan.cetak') ? 'bg-yellow-500 text-slate-950 font-bold shadow-md' : 'text-slate-200 hover:bg-white/10 hover:text-white' }}">
-                <svg class="w-4 h-4 flex-shrink-0 {{ request()->routeIs('laporan.cetak') ? 'text-slate-950' : 'text-yellow-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-                <span>Cetak Laporan Resmi</span>
+                class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all group {{ request()->routeIs('laporan.cetak') ? 'bg-[#1a73e8] text-white sidebar-active-glow font-bold' : 'text-slate-300 hover:bg-white/10 hover:text-white' }}">
+                <div class="flex items-center gap-3">
+                    <svg class="w-4 h-4 flex-shrink-0 {{ request()->routeIs('laporan.cetak') ? 'text-white' : 'text-blue-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                    <span>Cetak Laporan Resmi</span>
+                </div>
+                <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </a>
 
         </div>
