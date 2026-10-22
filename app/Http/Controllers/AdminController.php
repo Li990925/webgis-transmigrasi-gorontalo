@@ -63,10 +63,23 @@ class AdminController extends Controller
         // Recent audit logs
         $recentLogs = AuditLog::orderByDesc('created_at')->limit(8)->get();
 
-        // Native PostGIS Area summation
-        $postgisArea = DB::selectOne(
-            'SELECT round(SUM(ST_Area(geom_polygon::geography) / 10000.0)::numeric, 2) as total_gis_ha FROM kawasan_transmigrasis WHERE geom_polygon IS NOT NULL'
-        );
+        // Native GIS Area summation (PostGIS on pgsql, Eloquent sum fallback on MySQL/MariaDB)
+        $postgisArea = null;
+        try {
+            if (DB::getDriverName() === 'pgsql') {
+                $postgisArea = DB::selectOne(
+                    'SELECT round(SUM(ST_Area(geom_polygon::geography) / 10000.0)::numeric, 2) as total_gis_ha FROM kawasan_transmigrasis WHERE geom_polygon IS NOT NULL'
+                );
+            } else {
+                $postgisArea = (object) [
+                    'total_gis_ha' => round((float) $allKawasan->sum('luas_ha'), 2),
+                ];
+            }
+        } catch (\Throwable) {
+            $postgisArea = (object) [
+                'total_gis_ha' => round((float) $allKawasan->sum('luas_ha'), 2),
+            ];
+        }
 
         $clustering = $this->clusteringService->calculatePriorityClusters();
 
