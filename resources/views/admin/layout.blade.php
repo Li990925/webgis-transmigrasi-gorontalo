@@ -50,117 +50,51 @@
     </style>
     @yield('styles')
 </head>
-<body class="bg-[#f0f4f9] text-gray-800 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
+<body class="bg-[#f0f4f9] text-gray-800 min-h-screen flex antialiased selection:bg-blue-600 selection:text-white">
 
-    <!-- ==================== TOP PANORAMIC HEADER BANNER ==================== -->
-    <header class="top-panoramic-banner w-full h-20 border-b border-blue-950/40 px-3 sm:px-6 flex items-center justify-between text-white shadow-md sticky top-0 z-40 select-none">
+    <!-- ==================== LEFT SIDEBAR (MATCHING IMAGE 2 - FULL 100VH) ==================== -->
+    <aside id="sidebar" class="w-64 bg-[#081e36] border-r border-[#0d2a4a] flex-shrink-0 flex flex-col justify-between hidden md:flex sticky top-0 h-screen z-30 shadow-2xl text-white select-none">
         
-        <!-- Left: Branding & Official Emblem -->
-        <div class="flex items-center gap-3">
-            <button id="mobile-menu-btn" class="md:hidden p-1.5 rounded-lg bg-blue-950/60 text-white hover:bg-blue-900 border border-white/20">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 group">
-                <div class="w-11 h-12 rounded-xl bg-white/10 backdrop-blur-md p-1 border border-white/30 shadow-sm flex items-center justify-center flex-shrink-0 group-hover:border-yellow-400 transition-colors">
+        <!-- Top: Official Emblem & Branding (Header inside Sidebar) -->
+        <div class="p-3.5 border-b border-[#0d2a4a] bg-gradient-to-b from-[#07192d] to-[#081e36] flex-shrink-0">
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5 group">
+                <div class="w-10 h-11 rounded-xl bg-white/10 backdrop-blur-md p-1 border border-white/25 shadow-sm flex items-center justify-center flex-shrink-0 group-hover:border-yellow-400 transition-colors">
                     <img src="/images/logo.png" alt="Lambang Daerah Provinsi Gorontalo" class="w-full h-full object-contain filter drop-shadow">
                 </div>
                 <div class="leading-tight">
-                    <div class="text-[10px] sm:text-[11px] font-bold tracking-wider text-blue-100 uppercase">
+                    <div class="text-[9px] font-bold tracking-wider text-blue-200 uppercase">
                         SISTEM INFORMASI
                     </div>
-                    <div class="text-sm sm:text-lg font-black tracking-wide text-white drop-shadow-xs">
+                    <div class="text-sm font-black tracking-wide text-white drop-shadow-xs">
                         TRANSMIGRASI
                     </div>
-                    <div class="text-[9px] sm:text-[10px] font-bold tracking-widest text-yellow-300 uppercase">
+                    <div class="text-[9px] font-bold tracking-widest text-yellow-300 uppercase">
                         PROVINSI GORONTALO
                     </div>
                 </div>
             </a>
         </div>
 
-        <!-- Center: Inspiring Motto Quote -->
-        <div class="hidden lg:flex items-center justify-center max-w-xl text-center px-4">
-            <div class="relative">
-                <span class="text-2xl text-yellow-400/80 font-serif leading-none select-none">“</span>
-                <p class="inline text-xs xl:text-sm font-serif-quote italic text-white/95 drop-shadow font-medium px-1.5">
-                    Transmigrasi untuk Masyarakat Sejahtera dan Kawasan Berkembang
-                </p>
-                <span class="text-2xl text-yellow-400/80 font-serif leading-none select-none">”</span>
-            </div>
-        </div>
-
-        <!-- Right: Time Widget, Notifications & Admin Profile -->
-        <div class="flex items-center gap-2.5 sm:gap-3.5">
+        <!-- Middle: Nav Links (Scrollable independently so it never overflows) -->
+        <div class="flex-1 overflow-y-auto py-3 px-3 space-y-1">
             
-            <!-- Real-time Clock / Date Badge (Glassmorphism) -->
-            <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/40 backdrop-blur-md border border-white/15 text-white shadow-2xs">
-                <svg class="w-4 h-4 text-yellow-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                <div class="text-[11px] font-medium tracking-tight">
-                    <span id="current-date-badge">{{ now()->locale('id')->isoFormat('dddd, D MMMM Y') }}</span>
-                    <span class="text-white/40 mx-1">|</span>
-                    <span id="current-time-badge" class="font-mono font-bold text-yellow-300">{{ now()->format('H:i') }} WITA</span>
+            <!-- 1. Dashboard (Active Pill) -->
+            <a href="{{ route('admin.dashboard') }}" 
+                class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-[#1a73e8] text-white sidebar-active-glow' : 'text-slate-300 hover:bg-white/10 hover:text-white' }}">
+                <div class="flex items-center gap-3">
+                    <svg class="w-4 h-4 {{ request()->routeIs('admin.dashboard') ? 'text-white' : 'text-blue-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    <span>Dashboard</span>
                 </div>
-            </div>
+            </a>
 
-            <!-- Notification Bell with Count -->
-            <div class="relative">
-                <button type="button" class="w-9 h-9 rounded-xl bg-slate-900/40 backdrop-blur-md border border-white/20 hover:bg-slate-900/60 text-white flex items-center justify-center transition shadow-2xs relative">
-                    <svg class="w-4 h-4 text-blue-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                    <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-600 text-white text-[10px] font-bold flex items-center justify-center shadow-xs border border-white/40">3</span>
-                </button>
-            </div>
-
-            <!-- Admin Profile Badge Dropdown Trigger -->
-            <div class="relative">
-                <button onclick="document.getElementById('persona-modal').classList.remove('hidden')" 
-                    class="flex items-center gap-2.5 pl-1.5 pr-2.5 py-1 rounded-xl bg-slate-900/45 backdrop-blur-md border border-white/20 hover:bg-slate-900/70 text-left transition shadow-2xs cursor-pointer group">
-                    <div class="w-8 h-8 rounded-lg bg-yellow-500 text-slate-950 font-bold text-xs flex items-center justify-center shadow-xs overflow-hidden border border-yellow-300">
-                        @if(Auth::user()->avatar ?? false)
-                            <img src="{{ Auth::user()->avatar }}" alt="Avatar" class="w-full h-full object-cover">
-                        @else
-                            {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
-                        @endif
-                    </div>
-                    <div class="hidden md:block leading-tight text-left">
-                        <div class="text-xs font-bold text-white group-hover:text-yellow-300 transition-colors flex items-center gap-1">
-                            <span>{{ Auth::user()->name }}</span>
-                            <svg class="w-3 h-3 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
-                        <div class="text-[10px] text-blue-200 truncate max-w-[140px]">
-                            {{ Auth::user()->kabupaten ?? 'Provinsi Gorontalo' }}
-                        </div>
-                    </div>
-                </button>
-            </div>
-
-        </div>
-    </header>
-
-    <!-- ==================== BODY WRAPPER (SIDEBAR + MAIN CONTENT) ==================== -->
-    <div class="flex flex-1 min-h-[calc(100vh-5rem)] bg-[#081e36]">
-        
-        <!-- ==================== LEFT SIDEBAR (DEEP NAVY BLUE) ==================== -->
-        <aside id="sidebar" class="w-64 bg-[#081e36] border-r border-[#0d2a4a] flex-shrink-0 flex flex-col justify-between hidden md:flex sticky top-20 h-[calc(100vh-5rem)] z-30 shadow-lg text-white select-none">
-            <div class="overflow-y-auto py-3 px-3 space-y-1">
-                
-                <!-- 1. Dashboard (Active Pill) -->
-                <a href="{{ route('admin.dashboard') }}" 
-                    class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-[#1a73e8] text-white sidebar-active-glow' : 'text-slate-300 hover:bg-white/10 hover:text-white' }}">
-                    <div class="flex items-center gap-3">
-                        <svg class="w-4 h-4 {{ request()->routeIs('admin.dashboard') ? 'text-white' : 'text-blue-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                        <span>Dashboard</span>
-                    </div>
-                </a>
-
-                <!-- 2. Profil Transmigrasi -->
-                <a href="{{ route('admin.dashboard') }}" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-300 hover:bg-white/10 hover:text-white transition">
-                    <div class="flex items-center gap-3">
-                        <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                        <span>Profil Transmigrasi</span>
-                    </div>
-                    <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </a>
+            <!-- 2. Profil Transmigrasi -->
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-300 hover:bg-white/10 hover:text-white transition">
+                <div class="flex items-center gap-3">
+                    <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    <span>Profil Transmigrasi</span>
+                </div>
+                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
 
                 <!-- 3. Data Kawasan -->
                 <a href="{{ route('admin.kawasan.index') }}" 
@@ -308,7 +242,77 @@
         </aside>
 
         <!-- ==================== MAIN CONTENT AREA ==================== -->
-        <div class="flex-1 flex flex-col min-w-0 bg-[#f0f4f9]">
+        <div class="flex-1 flex flex-col min-w-0 min-h-screen bg-[#f0f4f9]">
+            
+            <!-- ==================== TOP PANORAMIC HEADER BANNER ==================== -->
+            <header class="top-panoramic-banner w-full h-16 sm:h-20 border-b border-blue-950/40 px-3 sm:px-6 flex items-center justify-between text-white shadow-md sticky top-0 z-20 select-none">
+                
+                <!-- Left: Mobile Menu Toggle Button (md:hidden) & Inspiring Motto Quote -->
+                <div class="flex items-center gap-3">
+                    <button id="mobile-menu-btn" class="md:hidden p-1.5 rounded-lg bg-blue-950/60 text-white hover:bg-blue-900 border border-white/20">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+
+                    <div class="md:hidden flex items-center gap-2">
+                        <span class="text-xs font-bold text-white tracking-wide">WEBGIS TRANSMIGRASI</span>
+                    </div>
+
+                    <!-- Motto Quote for desktop -->
+                    <div class="hidden lg:flex items-center text-left max-w-xl">
+                        <span class="text-2xl text-yellow-400/80 font-serif leading-none select-none mr-1.5">“</span>
+                        <p class="inline text-xs xl:text-sm font-serif-quote italic text-white/95 drop-shadow font-medium">
+                            Transmigrasi untuk Masyarakat Sejahtera dan Kawasan Berkembang
+                        </p>
+                        <span class="text-2xl text-yellow-400/80 font-serif leading-none select-none ml-1.5">”</span>
+                    </div>
+                </div>
+
+                <!-- Right: Time Widget, Notifications & Admin Profile -->
+                <div class="flex items-center gap-2.5 sm:gap-3.5">
+                    
+                    <!-- Real-time Clock / Date Badge (Glassmorphism) -->
+                    <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/40 backdrop-blur-md border border-white/15 text-white shadow-2xs">
+                        <svg class="w-4 h-4 text-yellow-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <div class="text-[11px] font-medium tracking-tight">
+                            <span id="current-date-badge">{{ now()->locale('id')->isoFormat('dddd, D MMMM Y') }}</span>
+                            <span class="text-white/40 mx-1">|</span>
+                            <span id="current-time-badge" class="font-mono font-bold text-yellow-300">{{ now()->format('H:i') }} WITA</span>
+                        </div>
+                    </div>
+
+                    <!-- Notification Bell with Count -->
+                    <div class="relative">
+                        <button type="button" class="w-9 h-9 rounded-xl bg-slate-900/40 backdrop-blur-md border border-white/20 hover:bg-slate-900/60 text-white flex items-center justify-center transition shadow-2xs relative">
+                            <svg class="w-4 h-4 text-blue-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                            <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-600 text-white text-[10px] font-bold flex items-center justify-center shadow-xs border border-white/40">3</span>
+                        </button>
+                    </div>
+
+                    <!-- Admin Profile Badge Dropdown Trigger -->
+                    <div class="relative">
+                        <button onclick="document.getElementById('persona-modal').classList.remove('hidden')" 
+                            class="flex items-center gap-2.5 pl-1.5 pr-2.5 py-1 rounded-xl bg-slate-900/45 backdrop-blur-md border border-white/20 hover:bg-slate-900/70 text-left transition shadow-2xs cursor-pointer group">
+                            <div class="w-8 h-8 rounded-lg bg-yellow-500 text-slate-950 font-bold text-xs flex items-center justify-center shadow-xs overflow-hidden border border-yellow-300">
+                                @if(Auth::user()->avatar ?? false)
+                                    <img src="{{ Auth::user()->avatar }}" alt="Avatar" class="w-full h-full object-cover">
+                                @else
+                                    {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
+                                @endif
+                            </div>
+                            <div class="hidden md:block leading-tight text-left">
+                                <div class="text-xs font-bold text-white group-hover:text-yellow-300 transition-colors flex items-center gap-1">
+                                    <span>{{ Auth::user()->name }}</span>
+                                    <svg class="w-3 h-3 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </div>
+                                <div class="text-[10px] text-blue-200 truncate max-w-[140px]">
+                                    {{ Auth::user()->kabupaten ?? 'Provinsi Gorontalo' }}
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+
+                </div>
+            </header>
             
             <!-- System Flash Notifications -->
             @if (session('success') || session('error'))
@@ -362,7 +366,6 @@
             </footer>
 
         </div>
-    </div>
 
     <!-- ==================== MODAL PERSONA SWITCHER ==================== -->
     <div id="persona-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
@@ -418,7 +421,13 @@
         // Mobile sidebar toggle
         document.getElementById('mobile-menu-btn')?.addEventListener('click', function() {
             const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('hidden');
+            if (sidebar) {
+                sidebar.classList.toggle('hidden');
+                sidebar.classList.toggle('fixed');
+                sidebar.classList.toggle('inset-y-0');
+                sidebar.classList.toggle('left-0');
+                sidebar.classList.toggle('z-50');
+            }
         });
 
         // Dynamic Clock (WITA timezone UTC+8)
