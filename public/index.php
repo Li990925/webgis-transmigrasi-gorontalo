@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 define('LARAVEL_START', microtime(true));
 
 // Detect application core path (support shared hosting isolated core/ directory)
-$corePath = file_exists(__DIR__.'/../core/bootstrap/app.php')
-    ? __DIR__.'/../core'
-    : __DIR__.'/..';
+if (file_exists(__DIR__.'/../core/bootstrap/app.php')) {
+    $corePath = __DIR__.'/../core';
+} elseif (file_exists(__DIR__.'/../../core/bootstrap/app.php')) {
+    $corePath = __DIR__.'/../../core';
+} else {
+    $corePath = __DIR__.'/..';
+}
 
 // Determine if the application is in maintenance mode...
 if (file_exists($maintenance = $corePath.'/storage/framework/maintenance.php')) {

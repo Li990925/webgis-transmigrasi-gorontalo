@@ -98,7 +98,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR || './' }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR || './transmigrasi-gorontalo.gt.tc/' }}
           local-dir: ./staging/
           dangerous-clean-slate: false
           timeout: 600000
