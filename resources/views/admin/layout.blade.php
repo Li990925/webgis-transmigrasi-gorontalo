@@ -219,12 +219,94 @@
                         </div>
                     </div>
 
-                    <!-- Notification Bell with Count -->
-                    <div class="relative">
-                        <button type="button" class="w-9 h-9 rounded-xl bg-slate-900/40 backdrop-blur-md border border-white/20 hover:bg-slate-900/60 text-white flex items-center justify-center transition shadow-2xs relative">
+                    <!-- Notification Bell with Dropdown Popover & Link to Activity Logs -->
+                    @php
+                        $recentAuditNotifications = \App\Models\AuditLog::latest()->take(5)->get();
+                        $unreadNotifCount = min(9, $recentAuditNotifications->count());
+                    @endphp
+                    <div class="relative" id="notification-wrapper">
+                        <button id="notification-bell-btn" type="button" 
+                            class="w-9 h-9 rounded-xl bg-slate-900/40 backdrop-blur-md border border-white/20 hover:bg-slate-900/60 active:scale-95 text-white flex items-center justify-center transition shadow-2xs relative cursor-pointer"
+                            title="Notifikasi Aktivitas Sistem"
+                            aria-expanded="false"
+                            aria-haspopup="true">
                             <svg class="w-4 h-4 text-blue-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                            <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-600 text-white text-[10px] font-bold flex items-center justify-center shadow-xs border border-white/40">3</span>
+                            @if($unreadNotifCount > 0)
+                                <span class="absolute -top-1 -right-1 min-w-4 h-4 px-1 rounded-full bg-rose-600 text-white text-[10px] font-bold flex items-center justify-center shadow-xs border border-white/40">
+                                    {{ $unreadNotifCount }}
+                                </span>
+                            @endif
                         </button>
+
+                        <!-- Notification Dropdown Popover -->
+                        <div id="notification-dropdown" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-white border border-slate-200 shadow-2xl z-50 overflow-hidden text-slate-800 transform origin-top-right transition-all">
+                            <!-- Dropdown Header -->
+                            <div class="p-3.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-6 h-6 rounded-lg bg-blue-100 text-[#1a73e8] flex items-center justify-center">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                                    </div>
+                                    <h4 class="text-xs font-bold text-slate-900">Aktivitas Sistem Terbaru</h4>
+                                </div>
+                                <a href="{{ route('admin.audit-logs') }}" class="text-[10px] text-[#1a73e8] hover:text-blue-700 font-bold hover:underline flex items-center gap-1">
+                                    Lihat Semua &rarr;
+                                </a>
+                            </div>
+
+                            <!-- List of Recent Audit Logs -->
+                            <div class="max-h-80 overflow-y-auto divide-y divide-slate-100">
+                                @forelse($recentAuditNotifications as $notif)
+                                    <a href="{{ route('admin.audit-logs', ['search' => $notif->kawasan_nama ?: $notif->user_name]) }}" 
+                                       class="p-3 flex items-start gap-3 hover:bg-blue-50/50 transition-colors block group">
+                                        <div class="w-7 h-7 rounded-lg flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5
+                                            @if($notif->action === 'CREATE') bg-emerald-100 text-emerald-800
+                                            @elseif($notif->action === 'UPDATE') bg-amber-100 text-amber-800
+                                            @elseif($notif->action === 'DELETE') bg-rose-100 text-rose-800
+                                            @else bg-blue-100 text-blue-800 @endif">
+                                            @if($notif->action === 'CREATE')
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                            @elseif($notif->action === 'UPDATE')
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                            @elseif($notif->action === 'DELETE')
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                            @else
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            @endif
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center justify-between gap-1 mb-0.5">
+                                                <span class="text-[11px] font-bold text-slate-900 group-hover:text-[#1a73e8] transition-colors truncate">
+                                                    {{ $notif->user_name }}
+                                                </span>
+                                                <span class="text-[9px] text-slate-400 whitespace-nowrap font-mono">
+                                                    {{ $notif->created_at?->diffForHumans() }}
+                                                </span>
+                                            </div>
+                                            <p class="text-[11px] text-slate-600 line-clamp-2 leading-relaxed">
+                                                {{ $notif->notes ?: "Aksi {$notif->action} pada " . ($notif->kawasan_nama ?? 'data kawasan transmigrasi') }}
+                                            </p>
+                                            @if($notif->kabupaten)
+                                                <span class="inline-block mt-1 text-[9px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 font-medium border border-slate-200">
+                                                    {{ str_replace('Kabupaten ', '', $notif->kabupaten) }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </a>
+                                @empty
+                                    <div class="p-6 text-center text-xs text-slate-400">
+                                        Belum ada aktivitas tercatat.
+                                    </div>
+                                @endforelse
+                            </div>
+
+                            <!-- Dropdown Footer -->
+                            <div class="p-2.5 bg-slate-50 border-t border-slate-100 text-center">
+                                <a href="{{ route('admin.audit-logs') }}" class="w-full py-2 px-3 rounded-xl bg-white hover:bg-slate-100 text-[#1a73e8] hover:text-blue-700 text-xs font-bold border border-slate-200 transition-all flex items-center justify-center gap-1.5 shadow-2xs">
+                                    <span>Buka Halaman Log Aktivitas Sistem</span>
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Admin Profile Badge Dropdown Trigger -->
@@ -380,6 +462,32 @@
             }
         }
         setInterval(updateClock, 30000);
+
+        // Notification Bell Dropdown Toggle & Click-outside handler
+        const notifBtn = document.getElementById('notification-bell-btn');
+        const notifDropdown = document.getElementById('notification-dropdown');
+
+        if (notifBtn && notifDropdown) {
+            notifBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                notifDropdown.classList.toggle('hidden');
+                notifBtn.setAttribute('aria-expanded', !notifDropdown.classList.contains('hidden'));
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!notifDropdown.contains(e.target) && !notifBtn.contains(e.target)) {
+                    notifDropdown.classList.add('hidden');
+                    notifBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    notifDropdown.classList.add('hidden');
+                    notifBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
     </script>
     
     @yield('scripts')

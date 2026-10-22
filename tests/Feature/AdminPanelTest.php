@@ -227,4 +227,20 @@ class AdminPanelTest extends TestCase
         $response->assertDontSee('id="btn-persona-switcher"', false);
         $response->assertDontSee('id="persona-modal"', false);
     }
+
+    /**
+     * Test notification bell renders in admin layout with dynamic audit log link.
+     */
+    public function test_notification_bell_renders_with_activity_log_link(): void
+    {
+        $admin = User::where('role', 'super_admin')->first();
+
+        $response = $this->actingAs($admin)->get('/admin/dashboard');
+
+        $response->assertStatus(200);
+        $response->assertSee('id="notification-bell-btn"', false);
+        $response->assertSee('id="notification-dropdown"', false);
+        $response->assertSee('Aktivitas Sistem Terbaru', false);
+        $response->assertSee(route('admin.audit-logs'), false);
+    }
 }
