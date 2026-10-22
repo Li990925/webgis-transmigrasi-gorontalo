@@ -19,10 +19,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup PHP 8.2
+      - name: Setup PHP 8.4
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.4'
           extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, curl, zip, fileinfo, bcmath
           tools: composer:v2
 
@@ -36,7 +36,7 @@ jobs:
         run: composer validate --strict --no-check-all
 
       - name: Install Composer Dependencies (Production)
-        run: composer install --no-dev --prefer-dist --optimize-autoloader --no-progress --no-interaction
+        run: composer install --no-dev --prefer-dist --optimize-autoloader --no-progress --no-interaction --ignore-platform-req=php+
 
       - name: Install NPM Dependencies & Build Vite Assets
         run: |
@@ -81,7 +81,18 @@ jobs:
           ls -la staging/
           ls -la staging/htdocs/
 
+      - name: Check FTP Secrets Configuration
+        id: check_secrets
+        run: |
+          if [ -z "${{ secrets.FTP_SERVER }}" ] || [ -z "${{ secrets.FTP_USERNAME }}" ] || [ -z "${{ secrets.FTP_PASSWORD }}" ]; then
+            echo "::warning title=FTP Secrets Belum Diisi::Secret FTP_SERVER, FTP_USERNAME, atau FTP_PASSWORD belum diatur di Settings -> Secrets and variables -> Actions. Kunjungi repository settings untuk menambahkan secret."
+            echo "configured=false" >> $GITHUB_OUTPUT
+          else
+            echo "configured=true" >> $GITHUB_OUTPUT
+          fi
+
       - name: Deploy to InfinityFree via FTP
+        if: steps.check_secrets.outputs.configured == 'true'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
