@@ -16,8 +16,8 @@
         </div>
         <div class="flex items-center gap-2.5">
             <a href="{{ route('admin.users.create') }}"
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-purple-950 text-xs font-bold shadow-sm transition-all hover:scale-105 active:scale-95 cursor-pointer">
-                <svg class="w-4 h-4 text-purple-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold shadow-sm transition-all hover:scale-105 active:scale-95 cursor-pointer">
+                <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                 <span>Tambah Aparatur Baru</span>
             </a>
         </div>
@@ -25,12 +25,12 @@
 
     <!-- Alert Notifikasi Flash -->
     @if(session('success'))
-        <div class="p-4 rounded-lg bg-purple-50 border border-purple-200 text-purple-950 text-xs font-semibold flex items-center justify-between shadow-xs">
+        <div class="p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-semibold flex items-center justify-between shadow-xs">
             <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-yellow-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <svg class="w-5 h-5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <span>{{ session('success') }}</span>
             </div>
-            <button onclick="this.parentElement.remove()" class="text-purple-400 hover:text-purple-700 text-base font-bold cursor-pointer">&times;</button>
+            <button onclick="this.parentElement.remove()" class="text-emerald-500 hover:text-emerald-800 text-base font-bold cursor-pointer">&times;</button>
         </div>
     @endif
 
@@ -47,7 +47,7 @@
     <!-- 4 Metrik Ringkasan Akun -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="p-4 rounded-xl bg-white border border-gray-200 shadow-sm flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-lg bg-purple-100 flex items-center justify-center text-purple-900 shrink-0">
+            <div class="w-11 h-11 rounded-lg bg-blue-50 flex items-center justify-center text-[#1a73e8] shrink-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
             </div>
             <div>
@@ -57,12 +57,12 @@
         </div>
 
         <div class="p-4 rounded-xl bg-white border border-gray-200 shadow-sm flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-lg bg-purple-900 text-yellow-400 flex items-center justify-center shrink-0 shadow-xs">
+            <div class="w-11 h-11 rounded-lg bg-[#081e36] text-yellow-400 flex items-center justify-center shrink-0 shadow-xs">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
             </div>
             <div>
                 <div class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Super Admin</div>
-                <div class="text-xl font-extrabold text-purple-900 mt-0.5">{{ $stats['super_admin'] }} Orang</div>
+                <div class="text-xl font-extrabold text-blue-900 mt-0.5">{{ $stats['super_admin'] }} Orang</div>
             </div>
         </div>
 
@@ -97,12 +97,12 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
                 <input type="text" name="search" value="{{ $search }}" placeholder="Cari nama aparatur, email kedinasan, jabatan, atau kabupaten..."
-                    class="w-full pl-9 pr-3 py-2 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all">
+                    class="w-full pl-9 pr-3 py-2 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
             </div>
 
             <!-- Filter Peran -->
             <div class="sm:col-span-3">
-                <select name="role" class="w-full py-2 px-3 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all">
+                <select name="role" class="w-full py-2 px-3 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
                     <option value="">Semua Peran Otoritas</option>
                     <option value="super_admin" {{ $selectedRole === 'super_admin' ? 'selected' : '' }}>Super Admin Provinsi</option>
                     <option value="operator_kabupaten" {{ $selectedRole === 'operator_kabupaten' ? 'selected' : '' }}>Operator Kabupaten</option>
@@ -112,7 +112,7 @@
 
             <!-- Action Buttons -->
             <div class="sm:col-span-2 flex items-center gap-2">
-                <button type="submit" class="flex-1 py-2 px-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-purple-950 text-xs font-bold shadow-sm transition-colors cursor-pointer">
+                <button type="submit" class="flex-1 py-2 px-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold shadow-sm transition-colors cursor-pointer">
                     Cari
                 </button>
                 <a href="{{ route('admin.users.index') }}" class="py-2 px-3 rounded-xl bg-white hover:bg-gray-100 text-gray-600 hover:text-gray-900 text-xs font-semibold border border-gray-300 shadow-sm transition-colors text-center">
@@ -138,10 +138,10 @@
                 </thead>
                 <tbody class="divide-y divide-slate-200 divide-x divide-slate-200 text-xs text-gray-700">
                     @forelse($users as $user)
-                        <tr class="odd:bg-white even:bg-slate-50/70 hover:bg-purple-50/40 transition-colors {{ Auth::id() === $user->id ? 'bg-amber-50/50' : '' }}">
+                        <tr class="odd:bg-white even:bg-slate-50/70 hover:bg-blue-50/40 transition-colors {{ Auth::id() === $user->id ? 'bg-amber-50/50' : '' }}">
                             <td class="py-3 px-3.5">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-lg bg-purple-900 text-yellow-400 font-extrabold flex items-center justify-center text-xs shrink-0 shadow-2xs">
+                                    <div class="w-9 h-9 rounded-lg bg-[#081e36] text-yellow-400 font-extrabold flex items-center justify-center text-xs shrink-0 shadow-2xs">
                                         {{ strtoupper(substr($user->name, 0, 2)) }}
                                     </div>
                                     <div>
@@ -162,8 +162,8 @@
                             </td>
                             <td class="py-3 px-3.5">
                                 @if($user->role === 'super_admin')
-                                    <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold bg-purple-50 text-purple-900 border border-purple-200">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-purple-700"></span>
+                                    <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-900 border border-blue-200">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#1a73e8]"></span>
                                         Super Admin
                                     </span>
                                 @elseif($user->role === 'operator_kabupaten')
@@ -194,7 +194,7 @@
                             <td class="py-3 px-3.5 text-center">
                                 <div class="inline-flex items-center gap-1.5">
                                     <a href="{{ route('admin.users.edit', $user) }}"
-                                        class="p-1.5 rounded bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-900 border border-slate-300 transition-colors cursor-pointer"
+                                        class="p-1.5 rounded bg-slate-100 hover:bg-blue-100 text-slate-700 hover:text-blue-900 border border-slate-300 transition-colors cursor-pointer"
                                         title="Ubah Data & Reset Password">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                                     </a>

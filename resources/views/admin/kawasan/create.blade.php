@@ -33,7 +33,7 @@
         <!-- Section 1: Identitas & Lokasi Administratif -->
         <div class="p-6 rounded-xl bg-white border border-gray-200 shadow-sm space-y-4">
             <h2 class="text-sm font-bold text-gray-900 flex items-center gap-2 border-b border-gray-200 pb-3">
-                <span class="w-6 h-6 rounded-lg bg-purple-100 text-purple-900 flex items-center justify-center text-xs font-extrabold">1</span>
+                <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-900 flex items-center justify-center text-xs font-extrabold">1</span>
                 Identitas Kawasan & Administrasi Wilayah
             </h2>
 
@@ -41,12 +41,12 @@
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Nama Kawasan <span class="text-rose-500">*</span></label>
                     <input type="text" name="nama" required value="{{ old('nama') }}" placeholder="Contoh: UPT Ayula Baru"
-                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                 </div>
 
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Tipe Kawasan <span class="text-rose-500">*</span></label>
-                    <select name="tipe" required class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                    <select name="tipe" required class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                         <option value="UPT" {{ old('tipe') === 'UPT' ? 'selected' : '' }}>UPT (Unit Pemukiman Transmigrasi)</option>
                         <option value="KTM" {{ old('tipe') === 'KTM' ? 'selected' : '' }}>KTM (Kota Terpadu Mandiri)</option>
                     </select>
@@ -54,7 +54,7 @@
 
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Kabupaten <span class="text-rose-500">*</span></label>
-                    <select name="kabupaten" required class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                    <select name="kabupaten" required class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                         @if ($user->isSuperAdmin())
                             @foreach(['Kabupaten Boalemo', 'Kabupaten Pohuwato', 'Kabupaten Gorontalo', 'Kabupaten Gorontalo Utara'] as $kab)
                                 <option value="{{ $kab }}" {{ old('kabupaten') === $kab ? 'selected' : '' }}>{{ $kab }}</option>
@@ -68,19 +68,19 @@
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Kecamatan <span class="text-rose-500">*</span></label>
                     <input type="text" name="kecamatan" required value="{{ old('kecamatan') }}" placeholder="Contoh: Tilamuta"
-                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                 </div>
 
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Desa <span class="text-rose-500">*</span></label>
                     <input type="text" name="desa" required value="{{ old('desa') }}" placeholder="Contoh: Ayula"
-                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                 </div>
 
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Tahun Penempatan <span class="text-rose-500">*</span></label>
                     <input type="number" name="tahun_penempatan" required value="{{ old('tahun_penempatan', date('Y')) }}" min="1980" max="2030"
-                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                 </div>
             </div>
         </div>
@@ -96,36 +96,36 @@
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Jumlah KK <span class="text-rose-500">*</span></label>
                     <input type="number" name="jumlah_kk" id="input_kk" required value="{{ old('jumlah_kk', 0) }}" min="1"
-                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                 </div>
 
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Jumlah Jiwa <span class="text-rose-500">*</span></label>
                     <input type="number" name="jumlah_jiwa" required value="{{ old('jumlah_jiwa', 0) }}" min="1"
-                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                 </div>
 
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">KK Sudah SHM <span class="text-rose-500">*</span></label>
                     <input type="number" name="kk_shm" id="input_shm" required value="{{ old('kk_shm', 0) }}" min="0"
-                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                 </div>
 
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">KK Belum SHM (Non-SHM) <span class="text-rose-500">*</span></label>
                     <input type="number" name="kk_non_shm" id="input_non_shm" required value="{{ old('kk_non_shm', 0) }}" min="0"
-                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                 </div>
 
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Luas Kawasan (Hektar) <span class="text-rose-500">*</span></label>
                     <input type="number" step="0.01" name="luas_ha" required value="{{ old('luas_ha', 0) }}" min="0.1"
-                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                 </div>
 
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Status Perkembangan <span class="text-rose-500">*</span></label>
-                    <select name="status_perkembangan" required class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                    <select name="status_perkembangan" required class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                         <option value="Pembinaan" {{ old('status_perkembangan') === 'Pembinaan' ? 'selected' : '' }}>Pembinaan</option>
                         <option value="Berkembang" {{ old('status_perkembangan') === 'Berkembang' ? 'selected' : '' }}>Berkembang</option>
                         <option value="Mandiri" {{ old('status_perkembangan') === 'Mandiri' ? 'selected' : '' }}>Mandiri</option>
@@ -135,13 +135,13 @@
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Skor Kemandirian (0 - 100)</label>
                     <input type="number" name="skor_kemandirian" value="{{ old('skor_kemandirian', 70) }}" min="0" max="100"
-                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                 </div>
 
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Komoditas Unggulan</label>
                     <input type="text" name="komoditas_unggulan" value="{{ old('komoditas_unggulan') }}" placeholder="Pisang, Jagung, Kelapa"
-                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                        class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                 </div>
             </div>
         </div>
@@ -149,7 +149,7 @@
         <!-- Section 3: Koordinat Spasial PostGIS -->
         <div class="p-6 rounded-xl bg-white border border-gray-200 shadow-sm space-y-4">
             <h2 class="text-sm font-bold text-gray-900 flex items-center gap-2 border-b border-gray-200 pb-3">
-                <span class="w-6 h-6 rounded-lg bg-purple-100 text-purple-900 flex items-center justify-center text-xs font-extrabold">3</span>
+                <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-900 flex items-center justify-center text-xs font-extrabold">3</span>
                 Koordinat Titik Spasial (PostGIS Point SRID 4326)
             </h2>
 
@@ -158,16 +158,16 @@
                     <div>
                         <label class="block font-bold text-gray-700 mb-1">Latitude (Lintang) <span class="text-rose-500">*</span></label>
                         <input type="number" step="0.0000001" name="latitude" id="input_latitude" required value="{{ old('latitude', '0.550000') }}"
-                            class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 font-mono focus:outline-none focus:ring-2 focus:ring-purple-900">
+                            class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 font-mono focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                     </div>
 
                     <div>
                         <label class="block font-bold text-gray-700 mb-1">Longitude (Bujur) <span class="text-rose-500">*</span></label>
                         <input type="number" step="0.0000001" name="longitude" id="input_longitude" required value="{{ old('longitude', '122.350000') }}"
-                            class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 font-mono focus:outline-none focus:ring-2 focus:ring-purple-900">
+                            class="w-full py-2.5 px-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 font-mono focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                     </div>
 
-                    <div class="p-3 rounded-xl bg-purple-50 border border-purple-200 text-[11px] text-purple-900">
+                    <div class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-[11px] text-blue-900">
                         <span class="font-bold">Tips:</span> Anda dapat mengklik langsung di atas peta di sebelah kanan untuk menentukan koordinat pusat titik secara presisi. Poligon batas dapat diedit lebih lanjut melalui menu <span class="font-bold underline">Editor Spasial</span> setelah disimpan.
                     </div>
                 </div>
@@ -183,7 +183,7 @@
             <a href="{{ route('admin.kawasan.index') }}" class="px-5 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold border border-gray-300 transition-colors">
                 Batal
             </a>
-            <button type="submit" class="px-6 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-purple-950 text-xs font-bold shadow-sm transition-all flex items-center gap-2 cursor-pointer">
+            <button type="submit" class="px-6 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold shadow-sm transition-all flex items-center gap-2 cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                 <span>Simpan Kawasan Baru</span>
             </button>

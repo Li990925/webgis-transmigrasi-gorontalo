@@ -185,6 +185,19 @@ class AdminPanelTest extends TestCase
     }
 
     /**
+     * Test web logout via GET method to prevent 405 MethodNotAllowed.
+     */
+    public function test_web_logout_via_get(): void
+    {
+        $admin = User::where('role', 'super_admin')->first();
+
+        $response = $this->actingAs($admin)->get('/logout');
+
+        $response->assertRedirect('/');
+        $this->assertGuest();
+    }
+
+    /**
      * Test public portal header shows secure login button for guests and no insecure persona switcher.
      */
     public function test_guest_public_portal_header_is_secure(): void

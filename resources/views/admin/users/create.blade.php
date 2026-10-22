@@ -38,8 +38,8 @@
 
         <!-- BAGIAN 1: IDENTITAS & PROFIL APARATUR -->
         <div>
-            <h2 class="text-xs font-bold text-purple-900 uppercase tracking-wider mb-4 flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-purple-700"></span>
+            <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#1a73e8]"></span>
                 <span>1. Profil & Identitas Pegawai Kedinasan</span>
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -48,7 +48,7 @@
                         Nama Lengkap & Gelar / NIP <span class="text-rose-500">*</span>
                     </label>
                     <input type="text" name="name" value="{{ old('name') }}" required placeholder="Contoh: Ir. Budi Santoso, M.Si / NIP 198501..."
-                        class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all">
+                        class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
                 </div>
 
                 <div>
@@ -56,7 +56,7 @@
                         Alamat Email Kedinasan <span class="text-rose-500">*</span>
                     </label>
                     <input type="email" name="email" value="{{ old('email') }}" required placeholder="aparatur@gorontalo.go.id"
-                        class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all font-mono">
+                        class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all font-mono">
                     <span class="text-[10px] text-gray-400 mt-1 block">Email ini digunakan sebagai akun login ke dalam portal WebGIS.</span>
                 </div>
 
@@ -65,14 +65,14 @@
                         Jabatan / Unit Kerja
                     </label>
                     <input type="text" name="jabatan" value="{{ old('jabatan') }}" placeholder="Contoh: Analis SIG Bidang Transmigrasi Disnakertrans"
-                        class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all">
+                        class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
                 </div>
             </div>
         </div>
 
         <!-- BAGIAN 2: HAK AKSES & PENUGASAN WILAYAH -->
         <div class="pt-5 border-t border-gray-200">
-            <h2 class="text-xs font-bold text-purple-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+            <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
                 <span>2. Hak Akses & Penugasan Wilayah</span>
             </h2>
@@ -82,7 +82,7 @@
                         Peran Sistem (Role) <span class="text-rose-500">*</span>
                     </label>
                     <select name="role" id="user-role-select" required onchange="toggleKabupatenField(this.value)"
-                        class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all">
+                        class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
                         <option value="">Pilih Peran Aparatur...</option>
                         <option value="operator_kabupaten" {{ old('role') === 'operator_kabupaten' ? 'selected' : '' }}>
                             Operator Kabupaten
@@ -101,7 +101,7 @@
                         Wilayah Kabupaten Penugasan <span id="kabupaten-required-star" class="text-rose-500">*</span>
                     </label>
                     <select name="kabupaten" id="kabupaten-select"
-                        class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all">
+                        class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
                         <option value="">Pilih Kabupaten Penugasan...</option>
                         @foreach($kabupatenList as $kab)
                             <option value="{{ $kab }}" {{ old('kabupaten') === $kab ? 'selected' : '' }}>{{ $kab }}</option>
@@ -116,8 +116,8 @@
 
         <!-- BAGIAN 3: KATA SANDI / KREDENSIAL KEAMANAN -->
         <div class="pt-5 border-t border-gray-200">
-            <h2 class="text-xs font-bold text-purple-900 uppercase tracking-wider mb-4 flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-purple-700"></span>
+            <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#1a73e8]"></span>
                 <span>3. Kredensial Kata Sandi</span>
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -127,10 +127,10 @@
                     </label>
                     <div class="relative">
                         <input type="password" name="password" id="password" required placeholder="Minimal 8 karakter..."
-                            class="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all">
-                        <button type="button" onclick="togglePasswordVisibility('password', 'eye-show-password', 'eye-hide-password')" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-purple-900 focus:outline-none cursor-pointer" title="Tampilkan / Sembunyikan Kata Sandi">
+                            class="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
+                        <button type="button" onclick="togglePasswordVisibility('password', 'eye-show-password', 'eye-hide-password')" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-[#1a73e8] focus:outline-none cursor-pointer" title="Tampilkan / Sembunyikan Kata Sandi">
                             <svg id="eye-show-password" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                            <svg id="eye-hide-password" class="w-4 h-4 hidden text-purple-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"></path></svg>
+                            <svg id="eye-hide-password" class="w-4 h-4 hidden text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"></path></svg>
                         </button>
                     </div>
                 </div>
@@ -141,10 +141,10 @@
                     </label>
                     <div class="relative">
                         <input type="password" name="password_confirmation" id="password_confirmation" required placeholder="Ulangi kata sandi di atas..."
-                            class="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all">
-                        <button type="button" onclick="togglePasswordVisibility('password_confirmation', 'eye-show-confirm', 'eye-hide-confirm')" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-purple-900 focus:outline-none cursor-pointer" title="Tampilkan / Sembunyikan Kata Sandi">
+                            class="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
+                        <button type="button" onclick="togglePasswordVisibility('password_confirmation', 'eye-show-confirm', 'eye-hide-confirm')" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-[#1a73e8] focus:outline-none cursor-pointer" title="Tampilkan / Sembunyikan Kata Sandi">
                             <svg id="eye-show-confirm" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                            <svg id="eye-hide-confirm" class="w-4 h-4 hidden text-purple-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"></path></svg>
+                            <svg id="eye-hide-confirm" class="w-4 h-4 hidden text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"></path></svg>
                         </button>
                     </div>
                 </div>
@@ -158,8 +158,8 @@
                 Batal
             </a>
             <button type="submit"
-                class="px-6 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-purple-950 text-xs font-bold shadow-md transition-all hover:scale-105 active:scale-95 flex items-center gap-1.5 cursor-pointer">
-                <svg class="w-4 h-4 text-purple-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                class="px-6 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold shadow-md transition-all hover:scale-105 active:scale-95 flex items-center gap-1.5 cursor-pointer">
+                <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                 <span>Simpan Akun Aparatur</span>
             </button>
         </div>

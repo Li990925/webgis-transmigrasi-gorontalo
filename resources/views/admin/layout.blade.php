@@ -386,11 +386,11 @@
             <div class="space-y-2">
                 @php
                     $personas = [
-                        ['role' => 'super_admin', 'title' => 'Super Admin Provinsi', 'email' => 'admin@gorontalo.go.id', 'badge' => 'Akses Penuh', 'badgeClass' => 'bg-purple-100 text-purple-900 border-purple-200'],
+                        ['role' => 'super_admin', 'title' => 'Super Admin Provinsi', 'email' => 'admin@gorontalo.go.id', 'badge' => 'Akses Penuh', 'badgeClass' => 'bg-blue-100 text-blue-900 border-blue-200'],
                         ['role' => 'eksekutif', 'title' => 'Eksekutif / Pimpinan', 'email' => 'eksekutif@gorontalo.go.id', 'badge' => 'Monitoring', 'badgeClass' => 'bg-amber-100 text-amber-900 border-amber-200'],
-                        ['role' => 'operator_boalemo', 'title' => 'Operator Boalemo', 'email' => 'operator.boalemo@gorontalo.go.id', 'badge' => 'Kab. Boalemo', 'badgeClass' => 'bg-blue-100 text-blue-900 border-blue-200'],
+                        ['role' => 'operator_boalemo', 'title' => 'Operator Boalemo', 'email' => 'operator.boalemo@gorontalo.go.id', 'badge' => 'Kab. Boalemo', 'badgeClass' => 'bg-sky-100 text-sky-900 border-sky-200'],
                         ['role' => 'operator_pohuwato', 'title' => 'Operator Pohuwato', 'email' => 'operator.pohuwato@gorontalo.go.id', 'badge' => 'Kab. Pohuwato', 'badgeClass' => 'bg-indigo-100 text-indigo-900 border-indigo-200'],
-                        ['role' => 'operator_gorontalo', 'title' => 'Operator Kab. Gorontalo', 'email' => 'operator.gorontalo@gorontalo.go.id', 'badge' => 'Kab. Gorontalo', 'badgeClass' => 'bg-purple-100 text-purple-900 border-purple-200'],
+                        ['role' => 'operator_gorontalo', 'title' => 'Operator Kab. Gorontalo', 'email' => 'operator.gorontalo@gorontalo.go.id', 'badge' => 'Kab. Gorontalo', 'badgeClass' => 'bg-cyan-100 text-cyan-900 border-cyan-200'],
                         ['role' => 'operator_gorut', 'title' => 'Operator Gorontalo Utara', 'email' => 'operator.gorut@gorontalo.go.id', 'badge' => 'Gorut', 'badgeClass' => 'bg-teal-100 text-teal-900 border-teal-200'],
                     ];
                 @endphp

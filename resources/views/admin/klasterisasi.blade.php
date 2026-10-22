@@ -9,7 +9,7 @@
     <div class="p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-                <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 text-xs font-bold mb-2">
+                <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-900 border border-blue-200 text-xs font-bold mb-2">
                     <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
                     Metode Resmi: Simple Additive Weighting (SAW)
                 </div>
@@ -21,10 +21,10 @@
 
             <div class="flex items-center gap-3">
                 <a href="{{ route('beranda') }}" target="_blank" class="px-3.5 py-2.5 rounded-xl border border-gray-300 hover:bg-gray-50 text-gray-700 text-xs font-bold shadow-sm transition-all flex items-center gap-2">
-                    <svg class="w-4 h-4 text-purple-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                    <svg class="w-4 h-4 text-[#081e36]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
                     <span>Peta Spasial GIS</span>
                 </a>
-                <a href="{{ route('laporan.cetak') }}" target="_blank" class="px-4 py-2.5 rounded-xl bg-purple-900 hover:bg-purple-800 text-white text-xs font-bold shadow-sm hover:shadow transition-all flex items-center gap-2">
+                <a href="{{ route('laporan.cetak') }}" target="_blank" class="px-4 py-2.5 rounded-xl bg-[#081e36] hover:bg-[#0d2a4a] text-white text-xs font-bold shadow-sm hover:shadow transition-all flex items-center gap-2">
                     <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                     <span>Cetak Laporan Resmi</span>
                 </a>
@@ -33,8 +33,8 @@
     </div>
 
     <!-- Methodology Transparency Card -->
-    <div class="rounded-xl bg-white border border-purple-200 shadow-sm overflow-hidden">
-        <div class="p-5 bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-950 text-white">
+    <div class="rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-5 bg-gradient-to-r from-[#07192d] via-[#081e36] to-[#0d2a4a] text-white">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div class="flex items-center gap-2.5">
                     <div class="w-8 h-8 rounded-lg bg-yellow-400/20 text-yellow-300 flex items-center justify-center font-black text-sm">
@@ -42,7 +42,7 @@
                     </div>
                     <div>
                         <h2 class="text-sm sm:text-base font-bold text-white">Metodologi Simple Additive Weighting (SAW) / Pembobotan Kriteria</h2>
-                        <p class="text-[11px] text-purple-200">Standar pengambilan keputusan transparan, adil, dan dapat diaudit secara manual oleh aparatur dinas.</p>
+                        <p class="text-[11px] text-slate-300">Standar pengambilan keputusan transparan, adil, dan dapat diaudit secara manual oleh aparatur dinas.</p>
                     </div>
                 </div>
                 <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-yellow-400/20 text-yellow-300 text-[11px] font-semibold border border-yellow-400/30">
@@ -59,18 +59,18 @@
             <!-- 3 Criteria Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <!-- Kriteria 1 -->
-                <div class="p-4 rounded-xl bg-purple-50/70 border border-purple-200 flex flex-col justify-between">
+                <div class="p-4 rounded-xl bg-blue-50/70 border border-blue-200 flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between">
-                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-200 text-purple-900 font-mono">KRITERIA 1 (C1)</span>
-                            <span class="text-sm font-extrabold text-purple-900 font-mono">Bobot 40%</span>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-900 font-mono">KRITERIA 1 (C1)</span>
+                            <span class="text-sm font-extrabold text-blue-900 font-mono">Bobot 40%</span>
                         </div>
                         <h4 class="text-xs font-bold text-gray-900 mt-2">Kesenjangan Hak Milik (% Non-SHM)</h4>
                         <p class="text-[11px] text-gray-600 mt-1">
                             Persentase kepala keluarga yang belum mengantongi SHM terhadap total KK penempatan kawasan.
                         </p>
                     </div>
-                    <div class="mt-3 pt-2 border-t border-purple-200/60 text-[10px] text-purple-800 font-mono">
+                    <div class="mt-3 pt-2 border-t border-blue-200/60 text-[10px] text-blue-800 font-mono">
                         Formula: ( % Non-SHM / 100 ) × 40
                     </div>
                 </div>
@@ -114,7 +114,7 @@
             <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-gray-700">
                 <div class="flex items-center gap-2">
                     <span class="font-bold text-gray-900">Rumus Komposit:</span>
-                    <span class="font-mono text-[11px] bg-white px-2 py-1 rounded border border-gray-300 text-purple-900">
+                    <span class="font-mono text-[11px] bg-white px-2 py-1 rounded border border-gray-300 text-slate-900 font-semibold">
                         Skor Urgensi = Skor(C1 40%) + Skor(C2 35%) + Skor(C3 25%)
                     </span>
                 </div>
@@ -264,7 +264,7 @@
                                 </td>
                                 <td class="py-3 px-3.5 text-gray-600 text-[11px] leading-relaxed max-w-xs">{{ $k['rekomendasi'] ?? 'Akselerasi PTSL Terpadu khusus transmigrasi dan tapal batas HPL.' }}</td>
                                 <td class="py-3 px-3.5 text-center">
-                                    <a href="{{ route('admin.kawasan.spasial', $k['id']) }}" class="px-2.5 py-1 rounded bg-purple-50 hover:bg-purple-100 text-purple-900 font-bold text-[11px] border border-purple-200 transition-colors inline-flex items-center gap-1">
+                                    <a href="{{ route('admin.kawasan.spasial', $k['id']) }}" class="px-2.5 py-1 rounded bg-blue-50 hover:bg-blue-100 text-blue-900 font-bold text-[11px] border border-blue-200 transition-colors inline-flex items-center gap-1">
                                         <span>Peta</span>
                                         <span>&rarr;</span>
                                     </a>
@@ -331,7 +331,7 @@
                                 </td>
                                 <td class="py-3 px-3.5 text-gray-600 text-[11px] leading-relaxed max-w-xs">{{ $k['rekomendasi'] ?? 'Pemberkasan Lahan Usaha II (LU-II) dan verifikasi data fisik pemegang hak.' }}</td>
                                 <td class="py-3 px-3.5 text-center">
-                                    <a href="{{ route('admin.kawasan.spasial', $k['id']) }}" class="px-2.5 py-1 rounded bg-purple-50 hover:bg-purple-100 text-purple-900 font-bold text-[11px] border border-purple-200 transition-colors inline-flex items-center gap-1">
+                                    <a href="{{ route('admin.kawasan.spasial', $k['id']) }}" class="px-2.5 py-1 rounded bg-blue-50 hover:bg-blue-100 text-blue-900 font-bold text-[11px] border border-blue-200 transition-colors inline-flex items-center gap-1">
                                         <span>Peta</span>
                                         <span>&rarr;</span>
                                     </a>
@@ -398,7 +398,7 @@
                                 </td>
                                 <td class="py-3 px-3.5 text-gray-600 text-[11px] leading-relaxed max-w-xs">{{ $k['rekomendasi'] ?? 'Pemeliharaan tapal batas dan fasilitasi peningkatan sertifikat elektronik.' }}</td>
                                 <td class="py-3 px-3.5 text-center">
-                                    <a href="{{ route('admin.kawasan.spasial', $k['id']) }}" class="px-2.5 py-1 rounded bg-purple-50 hover:bg-purple-100 text-purple-900 font-bold text-[11px] border border-purple-200 transition-colors inline-flex items-center gap-1">
+                                    <a href="{{ route('admin.kawasan.spasial', $k['id']) }}" class="px-2.5 py-1 rounded bg-blue-50 hover:bg-blue-100 text-blue-900 font-bold text-[11px] border border-blue-200 transition-colors inline-flex items-center gap-1">
                                         <span>Peta</span>
                                         <span>&rarr;</span>
                                     </a>

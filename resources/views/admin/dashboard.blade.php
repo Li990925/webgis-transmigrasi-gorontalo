@@ -92,7 +92,7 @@
         <div class="bg-white rounded-2xl p-4 border border-slate-200/90 shadow-2xs flex flex-col justify-between hover:shadow-xs transition relative overflow-hidden group">
             <div>
                 <div class="flex items-center gap-2 mb-2">
-                    <div class="w-8 h-8 rounded-lg bg-[#8b5cf6] text-white flex items-center justify-center flex-shrink-0 shadow-xs">
+                    <div class="w-8 h-8 rounded-lg bg-[#1a73e8] text-white flex items-center justify-center flex-shrink-0 shadow-xs">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     </div>
                     <span class="text-[11px] font-bold text-slate-700 leading-tight">SHM Terbit</span>
@@ -108,11 +108,11 @@
                     <!-- Circular Donut Progress 69% -->
                     <div class="relative w-10 h-10 flex items-center justify-center">
                         <svg class="w-10 h-10 transform -rotate-90">
-                            <circle cx="20" cy="20" r="16" stroke="#ede9fe" stroke-width="3.5" fill="transparent"/>
-                            <circle cx="20" cy="20" r="16" stroke="#8b5cf6" stroke-width="3.5" fill="transparent"
+                            <circle cx="20" cy="20" r="16" stroke="#dbeafe" stroke-width="3.5" fill="transparent"/>
+                            <circle cx="20" cy="20" r="16" stroke="#1a73e8" stroke-width="3.5" fill="transparent"
                                 stroke-dasharray="100.5" stroke-dashoffset="31.1" stroke-linecap="round"/>
                         </svg>
-                        <span class="absolute text-[10px] font-extrabold text-purple-700">69%</span>
+                        <span class="absolute text-[10px] font-extrabold text-[#1a73e8]">69%</span>
                     </div>
                 </div>
             </div>

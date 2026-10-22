@@ -12,7 +12,7 @@
             <p class="text-xs text-gray-500 mt-0.5">Catatan riwayat dari setiap penambahan data, pembaruan atribut, dan perubahan spasial.</p>
         </div>
         <div class="flex items-center gap-2">
-            <span class="px-3 py-1.5 rounded-xl bg-purple-100 text-purple-900 text-xs font-semibold border border-purple-200 flex items-center gap-1.5">
+            <span class="px-3 py-1.5 rounded-xl bg-blue-50 text-blue-900 text-xs font-semibold border border-blue-200 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
                 <span>Standar Kepatuhan Pemerintahan</span>
             </span>
@@ -29,12 +29,12 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama pengguna, deskripsi, kawasan..."
-                    class="w-full pl-9 pr-3 py-2 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all">
+                    class="w-full pl-9 pr-3 py-2 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
             </div>
 
             <!-- Filter Action -->
             <div class="sm:col-span-3">
-                <select name="action" class="w-full py-2 px-3 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all">
+                <select name="action" class="w-full py-2 px-3 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
                     <option value="all">Semua Tipe Aksi</option>
                     @foreach(['CREATE', 'UPDATE', 'DELETE', 'GEOMETRY_EDIT', 'LOGIN', 'LOGOUT', 'ROLE_SWITCH', 'IMPORT', 'EXPORT'] as $act)
                         <option value="{{ $act }}" {{ request('action') === $act ? 'selected' : '' }}>{{ $act }}</option>
@@ -44,7 +44,7 @@
 
             <!-- Filter Kabupaten -->
             <div class="sm:col-span-2">
-                <select name="kabupaten" class="w-full py-2 px-3 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all">
+                <select name="kabupaten" class="w-full py-2 px-3 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:bg-white transition-all">
                     <option value="all">Semua Wilayah</option>
                     @foreach(['Kabupaten Boalemo', 'Kabupaten Pohuwato', 'Kabupaten Gorontalo', 'Kabupaten Gorontalo Utara'] as $kab)
                         <option value="{{ $kab }}" {{ request('kabupaten') === $kab ? 'selected' : '' }}>{{ $kab }}</option>
@@ -54,7 +54,7 @@
 
             <!-- Action Buttons -->
             <div class="sm:col-span-2 flex items-center gap-2">
-                <button type="submit" class="flex-1 py-2 px-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-purple-950 text-xs font-bold shadow-sm transition-colors">
+                <button type="submit" class="flex-1 py-2 px-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold shadow-sm transition-colors cursor-pointer">
                     Filter
                 </button>
                 <a href="{{ route('admin.audit-logs') }}" class="py-2 px-3 rounded-xl bg-white hover:bg-gray-100 text-gray-600 hover:text-gray-900 text-xs font-semibold border border-gray-300 shadow-sm transition-colors">
@@ -81,7 +81,7 @@
                 </thead>
                 <tbody class="divide-y divide-slate-200 divide-x divide-slate-200 font-mono">
                     @forelse ($logs as $log)
-                        <tr class="odd:bg-white even:bg-slate-50/70 hover:bg-purple-50/40 transition-colors">
+                        <tr class="odd:bg-white even:bg-slate-50/70 hover:bg-blue-50/40 transition-colors">
                             <!-- Timestamp -->
                             <td class="py-3 px-3.5 whitespace-nowrap text-gray-600 font-mono text-[11px]">
                                 <div class="font-bold text-gray-800">{{ $log->created_at->format('d/m/Y') }}</div>
@@ -98,7 +98,7 @@
                             <td class="py-3 px-3.5 text-center whitespace-nowrap">
                                 <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase
                                     @if($log->action === 'CREATE') bg-emerald-50 text-emerald-800 border border-emerald-200
-                                    @elseif($log->action === 'UPDATE') bg-purple-50 text-purple-900 border border-purple-200
+                                    @elseif($log->action === 'UPDATE') bg-blue-50 text-blue-900 border border-blue-200
                                     @elseif($log->action === 'GEOMETRY_EDIT') bg-indigo-50 text-indigo-800 border border-indigo-200
                                     @elseif($log->action === 'DELETE') bg-rose-50 text-rose-800 border border-rose-200
                                     @elseif($log->action === 'ROLE_SWITCH') bg-amber-50 text-amber-800 border border-amber-200
@@ -160,7 +160,7 @@
     <div class="bg-white border border-gray-200 rounded-xl max-w-2xl w-full p-6 shadow-2xl space-y-4">
         <div class="flex items-center justify-between pb-3 border-b border-gray-100">
             <h3 class="text-sm font-bold text-gray-900 flex items-center gap-2">
-                <span id="modal-action-badge" class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-purple-100 text-purple-900"></span>
+                <span id="modal-action-badge" class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-blue-100 text-blue-900"></span>
                 <span>Detail Perubahan Data (Audit Payload)</span>
             </h3>
             <button onclick="document.getElementById('payload-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600 text-lg font-bold">&times;</button>
@@ -172,8 +172,8 @@
                 <pre id="modal-old-values" class="p-3 rounded-xl bg-amber-50/50 border border-amber-200 text-gray-800 font-mono text-[10px] overflow-auto max-h-60 leading-relaxed"></pre>
             </div>
             <div>
-                <div class="text-[11px] font-bold text-purple-900 uppercase tracking-wider mb-1.5">Nilai Sesudah (New Values):</div>
-                <pre id="modal-new-values" class="p-3 rounded-xl bg-purple-50/50 border border-purple-200 text-gray-800 font-mono text-[10px] overflow-auto max-h-60 leading-relaxed"></pre>
+                <div class="text-[11px] font-bold text-blue-900 uppercase tracking-wider mb-1.5">Nilai Sesudah (New Values):</div>
+                <pre id="modal-new-values" class="p-3 rounded-xl bg-blue-50/50 border border-blue-200 text-gray-800 font-mono text-[10px] overflow-auto max-h-60 leading-relaxed"></pre>
             </div>
         </div>
 

@@ -15,19 +15,19 @@
 
         <div class="flex flex-wrap items-center gap-2">
             @if(!$user->isEksekutif())
-                <a href="{{ route('admin.kawasan.create') }}" class="px-3.5 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-purple-950 text-xs font-bold shadow-sm transition-all flex items-center gap-1.5 cursor-pointer">
+                <a href="{{ route('admin.kawasan.create') }}" class="px-3.5 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold shadow-sm transition-all flex items-center gap-1.5 cursor-pointer">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     <span>Tambah Kawasan</span>
                 </a>
 
                 <button onclick="document.getElementById('import-modal').classList.remove('hidden')" class="px-3.5 py-2 rounded-xl bg-white hover:bg-gray-50 text-gray-700 text-xs font-semibold border border-gray-300 shadow-2xs transition-all flex items-center gap-1.5 cursor-pointer">
-                    <svg class="w-4 h-4 text-purple-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    <svg class="w-4 h-4 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                     <span>Impor Excel</span>
                 </button>
             @endif
 
             <a href="{{ route('data.export') }}?format=xlsx" class="px-3 py-2 rounded-xl bg-white hover:bg-gray-50 text-gray-700 text-xs font-semibold border border-gray-300 shadow-2xs transition-all flex items-center gap-1.5 cursor-pointer">
-                <svg class="w-4 h-4 text-purple-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <svg class="w-4 h-4 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                 <span>Ekspor XLSX</span>
             </a>
 
@@ -48,12 +48,12 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama kawasan, desa, kecamatan..."
-                    class="w-full pl-9 pr-3 py-2 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-900 focus:border-transparent">
+                    class="w-full pl-9 pr-3 py-2 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1a73e8] focus:border-transparent">
             </div>
 
             <!-- Filter Kabupaten -->
             <div class="sm:col-span-3">
-                <select name="kabupaten" class="w-full py-2 px-3 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                <select name="kabupaten" class="w-full py-2 px-3 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                     <option value="all">Semua Kabupaten</option>
                     @foreach(['Kabupaten Boalemo', 'Kabupaten Pohuwato', 'Kabupaten Gorontalo', 'Kabupaten Gorontalo Utara'] as $kab)
                         <option value="{{ $kab }}" {{ request('kabupaten') === $kab ? 'selected' : '' }}>{{ $kab }}</option>
@@ -63,7 +63,7 @@
 
             <!-- Filter Status SHM -->
             <div class="sm:col-span-2">
-                <select name="status_shm" class="w-full py-2 px-3 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-900">
+                <select name="status_shm" class="w-full py-2 px-3 rounded-xl bg-gray-50 border border-gray-300 text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a73e8]">
                     <option value="">Status SHM (Semua)</option>
                     <option value="tinggi" {{ request('status_shm') === 'tinggi' ? 'selected' : '' }}>&ge; 75% (Tinggi)</option>
                     <option value="sedang" {{ request('status_shm') === 'sedang' ? 'selected' : '' }}>50% - 74% (Sedang)</option>
@@ -73,7 +73,7 @@
 
             <!-- Buttons -->
             <div class="sm:col-span-2 flex items-center gap-2">
-                <button type="submit" class="flex-1 py-2 px-3 rounded-xl bg-purple-900 hover:bg-purple-800 text-white text-xs font-bold transition-colors shadow-xs cursor-pointer">
+                <button type="submit" class="flex-1 py-2 px-3 rounded-xl bg-[#1a73e8] hover:bg-blue-600 text-white text-xs font-bold transition-colors shadow-xs cursor-pointer">
                     Filter
                 </button>
                 <a href="{{ route('admin.kawasan.index') }}" class="py-2 px-3 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-medium border border-gray-300 transition-colors">
@@ -135,14 +135,14 @@
 
                             <td class="py-3 px-3.5 text-center">
                                 <div class="flex items-center justify-between text-[11px] mb-1">
-                                    <span class="text-purple-900 font-bold">{{ $item->kk_shm }} SHM</span>
+                                    <span class="text-blue-900 font-bold">{{ $item->kk_shm }} SHM</span>
                                     <span class="text-yellow-800 font-semibold">{{ $item->kk_non_shm }} Non</span>
                                 </div>
                                 <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden flex">
-                                    <div class="h-full bg-purple-900" style="width: {{ $item->persentase_shm }}%"></div>
+                                    <div class="h-full bg-[#1a73e8]" style="width: {{ $item->persentase_shm }}%"></div>
                                     <div class="h-full bg-yellow-500" style="width: {{ 100 - $item->persentase_shm }}%"></div>
                                 </div>
-                                <div class="text-[10px] font-bold mt-1 {{ $item->persentase_shm >= 75 ? 'text-purple-900' : ($item->persentase_shm >= 50 ? 'text-yellow-700' : 'text-rose-700') }}">
+                                <div class="text-[10px] font-bold mt-1 {{ $item->persentase_shm >= 75 ? 'text-blue-900' : ($item->persentase_shm >= 50 ? 'text-yellow-700' : 'text-rose-700') }}">
                                     {{ $item->persentase_shm }}% Selesai
                                 </div>
                             </td>
@@ -153,7 +153,7 @@
 
                             <td class="py-3 px-3.5 text-center">
                                 <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase border
-                                    @if($item->status_perkembangan === 'Mandiri') bg-purple-50 text-purple-900 border-purple-200
+                                    @if($item->status_perkembangan === 'Mandiri') bg-emerald-50 text-emerald-800 border-emerald-200
                                     @elseif($item->status_perkembangan === 'Berkembang') bg-yellow-50 text-yellow-800 border-yellow-200
                                     @else bg-rose-50 text-rose-800 border-rose-200 @endif">
                                     {{ $item->status_perkembangan }}
@@ -165,7 +165,7 @@
                                     
                                     <!-- Editor Spasial Button -->
                                     <a href="{{ route('admin.kawasan.spasial', $item->id) }}" title="Editor Spasial Poligon"
-                                        class="p-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 transition-colors shadow-2xs">
+                                        class="p-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-900 border border-blue-200 transition-colors shadow-2xs">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
                                     </a>
 
@@ -222,7 +222,7 @@
     <div class="bg-white border border-gray-200 rounded-xl max-w-lg w-full p-6 shadow-2xl space-y-4 text-gray-800">
         <div class="flex items-center justify-between pb-3 border-b border-gray-200">
             <h3 class="text-base font-bold text-gray-900 flex items-center gap-2">
-                <svg class="w-5 h-5 text-purple-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                 Impor Data Massal (Excel / CSV)
             </h3>
             <button onclick="document.getElementById('import-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700 text-lg font-bold cursor-pointer">&times;</button>
@@ -237,19 +237,19 @@
             <div>
                 <label class="block text-xs font-bold text-gray-700 mb-2">Pilih File (.xlsx / .csv)</label>
                 <input type="file" name="file" required accept=".xlsx,.csv"
-                    class="w-full text-xs text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-purple-900 file:text-white hover:file:bg-purple-800 cursor-pointer bg-gray-50 p-2 rounded-xl border border-gray-300">
+                    class="w-full text-xs text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#081e36] file:text-white hover:file:bg-[#0d2a4a] cursor-pointer bg-gray-50 p-2 rounded-xl border border-gray-300">
             </div>
 
-            <div class="p-3 rounded-xl bg-purple-50 border border-purple-200 text-[11px] text-purple-900 flex items-center justify-between">
+            <div class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-[11px] text-blue-900 flex items-center justify-between">
                 <span>Belum memiliki format data?</span>
-                <a href="{{ route('data.template') }}" class="text-purple-900 font-bold hover:underline">Unduh Template XLSX</a>
+                <a href="{{ route('data.template') }}" class="text-blue-900 font-bold hover:underline">Unduh Template XLSX</a>
             </div>
 
             <div class="flex items-center justify-end gap-2 pt-2">
                 <button type="button" onclick="document.getElementById('import-modal').classList.add('hidden')" class="px-4 py-2 rounded-xl bg-gray-100 text-gray-700 text-xs font-bold hover:bg-gray-200 border border-gray-300 cursor-pointer">
                     Batal
                 </button>
-                <button type="submit" id="btn-submit-import" class="px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-purple-950 text-xs font-bold shadow-sm flex items-center gap-1.5 cursor-pointer">
+                <button type="submit" id="btn-submit-import" class="px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold shadow-sm flex items-center gap-1.5 cursor-pointer">
                     <span>Mulai Proses Impor</span>
                 </button>
             </div>

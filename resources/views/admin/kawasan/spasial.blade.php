@@ -9,7 +9,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-white border border-gray-200 shadow-sm">
         <div>
             <div class="flex items-center gap-2">
-                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-900 border border-purple-200">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-900 border border-blue-200">
                     PostGIS SRID 4326 (Polygon & Point)
                 </span>
                 <span class="text-xs text-gray-500 font-medium">{{ $kawasanTransmigrasi->kabupaten }} &bull; Kec. {{ $kawasanTransmigrasi->kecamatan }}</span>
@@ -24,8 +24,8 @@
             </a>
 
             @if($canEdit && !$user->isEksekutif())
-                <button id="btn-save-geometry" class="px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-purple-950 text-xs font-bold shadow-sm hover:shadow transition-all flex items-center gap-1.5">
-                    <svg class="w-4 h-4 text-purple-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <button id="btn-save-geometry" class="px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-slate-950 text-xs font-bold shadow-sm hover:shadow transition-all flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                     <span>Simpan Perubahan ke PostGIS</span>
                 </button>
             @else
@@ -54,14 +54,14 @@
 
         <div class="p-3.5 rounded-xl bg-white border border-gray-200 shadow-sm">
             <div class="text-[10px] uppercase font-bold text-gray-500">Luas Geodesik PostGIS</div>
-            <div id="stat-postgis-area" class="text-lg font-mono font-extrabold text-purple-900 mt-0.5">
+            <div id="stat-postgis-area" class="text-lg font-mono font-extrabold text-blue-900 mt-0.5">
                 {{ $nativeAreaHa ? number_format($nativeAreaHa, 2) . ' Ha' : 'Dihitung saat simpan' }}
             </div>
         </div>
 
         <div class="p-3.5 rounded-xl bg-white border border-gray-200 shadow-sm">
             <div class="text-[10px] uppercase font-bold text-gray-500">Koordinat Titik Pusat</div>
-            <div id="stat-center-coords" class="text-xs font-mono font-semibold text-purple-700 mt-1 truncate">
+            <div id="stat-center-coords" class="text-xs font-mono font-semibold text-blue-700 mt-1 truncate">
                 {{ $kawasanTransmigrasi->latitude }}, {{ $kawasanTransmigrasi->longitude }}
             </div>
         </div>
@@ -76,7 +76,7 @@
         <div class="absolute top-4 right-4 z-10 flex flex-col gap-1.5 bg-white/95 backdrop-blur-md p-2 rounded-xl border border-gray-200 shadow-md text-xs">
             <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider px-1">Pilihan Citra Peta:</span>
             <div class="grid grid-cols-2 gap-1">
-                <button type="button" class="basemap-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-purple-900 text-white" data-layer="osm">OSM</button>
+                <button type="button" class="basemap-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-[#081e36] text-white" data-layer="osm">OSM</button>
                 <button type="button" class="basemap-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200" data-layer="satellite">Citra Satelit</button>
                 <button type="button" class="basemap-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200" data-layer="topo">Topografi</button>
                 <button type="button" class="basemap-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200" data-layer="dark">Gelap (Dark)</button>
@@ -85,12 +85,12 @@
 
         <!-- Floating Hint Box -->
         <div class="absolute bottom-4 left-4 z-10 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-gray-200 shadow-md text-xs max-w-sm hidden sm:block">
-            <div class="font-bold text-purple-900 mb-0.5 flex items-center gap-1.5">
+            <div class="font-bold text-blue-900 mb-0.5 flex items-center gap-1.5">
                 <svg class="w-4 h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 Panduan Digitasi Batas Spasial:
             </div>
             <p class="text-[11px] text-gray-600 leading-relaxed">
-                Gunakan alat di bilah sisi kiri peta (Geoman Toolbar) untuk mengedit verteks poligon, menggambar batas baru, atau menggeser titik tengah kawasan. Klik tombol <span class="text-purple-950 bg-yellow-400 px-1 py-0.5 rounded font-bold">"Simpan Perubahan ke PostGIS"</span> untuk menerapkan koordinat ke database.
+                Gunakan alat di bilah sisi kiri peta (Geoman Toolbar) untuk mengedit verteks poligon, menggambar batas baru, atau menggeser titik tengah kawasan. Klik tombol <span class="text-slate-950 bg-yellow-400 px-1 py-0.5 rounded font-bold">"Simpan Perubahan ke PostGIS"</span> untuk menerapkan koordinat ke database.
             </p>
         </div>
     </div>
@@ -130,11 +130,11 @@ document.addEventListener('DOMContentLoaded', function() {
             baseLayers[layerKey].addTo(map);
 
             document.querySelectorAll('.basemap-btn').forEach(b => {
-                b.classList.remove('bg-purple-900', 'text-white');
+                b.classList.remove('bg-[#081e36]', 'text-white');
                 b.classList.add('bg-gray-100', 'text-gray-700');
             });
             this.classList.remove('bg-gray-100', 'text-gray-700');
-            this.classList.add('bg-purple-900', 'text-white');
+            this.classList.add('bg-[#081e36]', 'text-white');
         });
     });
 

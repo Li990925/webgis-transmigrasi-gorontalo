@@ -16,7 +16,8 @@ Route::get('/kawasan/{kawasanTransmigrasi}', [KawasanTransmigrasiController::cla
 // Web Authentication & Session Persona Switcher
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'loginWeb'])->name('login.post');
-Route::post('/logout', [AuthController::class, 'logoutWeb'])->name('logout');
+Route::match(['get', 'post'], '/logout', [AuthController::class, 'logoutWeb'])->name('logout');
+Route::get('/switch-persona', fn () => redirect()->route('admin.dashboard'));
 Route::post('/switch-persona', [AuthController::class, 'switchRoleWeb'])->name('switch-persona.web');
 
 // Operasional CRUD & Geometry Editing (JSON / API & Web Form fallback)
