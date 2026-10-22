@@ -5,7 +5,7 @@
     <div id="webgis-modal-card" class="relative bg-white border border-slate-200/90 rounded-2xl shadow-2xl max-w-md w-full overflow-hidden text-center transform transition-all duration-200 scale-95 opacity-0">
         
         <!-- Decorative Top Colored Stripe based on Type -->
-        <div id="webgis-modal-stripe" class="h-1.5 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 transition-all duration-300"></div>
+        <div id="webgis-modal-stripe" class="h-1.5 w-full bg-gradient-to-r from-[#081e36] via-[#0d2a4a] to-[#081e36] transition-all duration-300"></div>
 
         <!-- Top Right Close Button (Esc / Close) -->
         <button type="button" id="webgis-modal-close-btn" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer" title="Tutup (Esc)">
@@ -68,7 +68,7 @@
     // Icons SVG Templates
     const ICONS = {
         success: `
-            <svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-8 h-8 text-[#081e36]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
             </svg>
         `,
@@ -83,7 +83,7 @@
             </svg>
         `,
         info: `
-            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-8 h-8 text-[#081e36]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
         `
@@ -91,10 +91,10 @@
 
     const THEMES = {
         success: {
-            stripe: 'bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600',
-            container: 'bg-emerald-50 border-2 border-emerald-100 ring-8 ring-emerald-50/60 shadow-emerald-100/50',
-            badge: 'bg-emerald-100 text-emerald-800 border border-emerald-200',
-            btn: 'bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white shadow-emerald-900/20'
+            stripe: 'bg-gradient-to-r from-[#081e36] via-[#0d2a4a] to-[#081e36]',
+            container: 'bg-[#081e36]/5 border-2 border-[#081e36]/20 ring-8 ring-[#081e36]/5 shadow-sm',
+            badge: 'bg-[#081e36]/10 text-[#081e36] border border-[#081e36]/25',
+            btn: 'bg-[#081e36] hover:bg-[#0d2a4a] text-white shadow-md hover:shadow-lg'
         },
         error: {
             stripe: 'bg-gradient-to-r from-rose-500 via-red-500 to-rose-600',
@@ -109,10 +109,10 @@
             btn: 'bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-slate-950 font-bold shadow-amber-900/20'
         },
         info: {
-            stripe: 'bg-gradient-to-r from-[#081e36] via-[#1a73e8] to-[#081e36]',
-            container: 'bg-blue-50 border-2 border-blue-100 ring-8 ring-blue-50/60 shadow-blue-100/50',
-            badge: 'bg-blue-100 text-blue-800 border border-blue-200',
-            btn: 'bg-gradient-to-r from-[#081e36] to-[#0d2a4a] hover:from-[#0d2a4a] hover:to-[#1a73e8] text-white shadow-slate-900/20'
+            stripe: 'bg-gradient-to-r from-[#081e36] via-[#0d2a4a] to-[#081e36]',
+            container: 'bg-[#081e36]/5 border-2 border-[#081e36]/20 ring-8 ring-[#081e36]/5 shadow-sm',
+            badge: 'bg-[#081e36]/10 text-[#081e36] border border-[#081e36]/25',
+            btn: 'bg-[#081e36] hover:bg-[#0d2a4a] text-white shadow-md hover:shadow-lg'
         }
     };
 

@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${data.data?.postgis_area_ha ? `
                             <div class="flex items-center justify-between py-1 border-b border-slate-200/70">
                                 <span class="text-slate-500">Luas Geodesik PostGIS:</span>
-                                <span class="font-bold text-emerald-700">${data.data.postgis_area_ha} Ha</span>
+                                <span class="font-bold text-[#081e36]">${data.data.postgis_area_ha} Ha</span>
                             </div>` : ''}
                             <div class="flex items-center justify-between py-1">
                                 <span class="text-slate-500">Verteks Poligon:</span>
