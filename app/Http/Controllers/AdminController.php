@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 
 class AdminController extends Controller
@@ -245,10 +246,20 @@ class AdminController extends Controller
 
         // Mark all audit logs as read upon visiting the page
         $now = now();
-        if ($user) {
-            $user->update(['last_audit_seen_at' => $now]);
-        }
         session(['audit_logs_last_viewed_at' => $now]);
+
+        if ($user) {
+            try {
+                if (! Schema::hasColumn('users', 'last_audit_seen_at')) {
+                    Schema::table('users', function ($table) {
+                        $table->timestamp('last_audit_seen_at')->nullable();
+                    });
+                }
+                $user->update(['last_audit_seen_at' => $now]);
+            } catch (\Throwable) {
+                // Failsafe fallback: if remote database lacks column/DDL permission, session already preserves state
+            }
+        }
 
         $query = AuditLog::orderByDesc('created_at');
 
@@ -282,11 +293,20 @@ class AdminController extends Controller
         /** @var User|null $user */
         $user = Auth::user();
         $now = now();
+        session(['audit_logs_last_viewed_at' => $now]);
 
         if ($user) {
-            $user->update(['last_audit_seen_at' => $now]);
+            try {
+                if (! Schema::hasColumn('users', 'last_audit_seen_at')) {
+                    Schema::table('users', function ($table) {
+                        $table->timestamp('last_audit_seen_at')->nullable();
+                    });
+                }
+                $user->update(['last_audit_seen_at' => $now]);
+            } catch (\Throwable) {
+                // Failsafe fallback: if remote database lacks column/DDL permission, session already preserves state
+            }
         }
-        session(['audit_logs_last_viewed_at' => $now]);
 
         return response()->json([
             'success' => true,

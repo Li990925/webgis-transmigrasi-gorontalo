@@ -222,7 +222,7 @@
                     <!-- Notification Bell with Dropdown Popover & Link to Activity Logs -->
                     @php
                         $recentAuditNotifications = \App\Models\AuditLog::latest()->take(5)->get();
-                        $lastAuditSeenAt = Auth::user()?->last_audit_seen_at ?? session('audit_logs_last_viewed_at');
+                        $lastAuditSeenAt = session('audit_logs_last_viewed_at') ?? (Auth::user()?->last_audit_seen_at ?? null);
                         
                         if (request()->routeIs('admin.audit-logs')) {
                             $unreadNotifCount = 0;
