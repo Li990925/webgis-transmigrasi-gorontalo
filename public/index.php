@@ -35,7 +35,21 @@ if (! file_exists($corePath.'/vendor/autoload.php')) {
         .'</div>');
 }
 
-// Auto-generate .env if not exists to avoid 500 MissingAppKeyException
+// Auto-generate or sanitize .env to avoid 500 errors on shared hosting
+foreach ([$corePath.'/.env', __DIR__.'/.env'] as $envFile) {
+    if (file_exists($envFile)) {
+        $envContent = file_get_contents($envFile);
+        if (str_contains($envContent, 'DB_CONNECTION=pgsql')) {
+            $envContent = str_replace(
+                ['DB_CONNECTION=pgsql', 'DB_HOST=127.0.0.1', 'DB_PORT=5432', 'DB_DATABASE=transmigrasi_gorontalo', 'DB_USERNAME=lie', 'SESSION_DRIVER=database'],
+                ['DB_CONNECTION=mysql', 'DB_HOST=sql211.infinityfree.com', 'DB_PORT=3306', 'DB_DATABASE=if0_42378255_transmigrasi', 'DB_USERNAME=if0_42378255', 'SESSION_DRIVER=file'],
+                $envContent
+            );
+            @file_put_contents($envFile, $envContent);
+        }
+    }
+}
+
 if (! file_exists($corePath.'/.env')) {
     $defaultEnv = "APP_NAME=\"WebGIS Transmigrasi Gorontalo\"\n"
         ."APP_ENV=production\n"
@@ -59,6 +73,16 @@ if (! file_exists($corePath.'/.env')) {
         ."QUEUE_CONNECTION=sync\n"
         ."FILESYSTEM_DISK=local\n";
     @file_put_contents($corePath.'/.env', $defaultEnv);
+}
+
+// Ensure runtime environment variables are safe
+if (getenv('DB_CONNECTION') === 'pgsql' || ($_ENV['DB_CONNECTION'] ?? '') === 'pgsql') {
+    $_ENV['DB_CONNECTION'] = 'mysql';
+    putenv('DB_CONNECTION=mysql');
+}
+if (empty($_ENV['SESSION_DRIVER']) || $_ENV['SESSION_DRIVER'] === 'database' || getenv('SESSION_DRIVER') === 'database') {
+    $_ENV['SESSION_DRIVER'] = 'file';
+    putenv('SESSION_DRIVER=file');
 }
 
 if (empty($_ENV['APP_KEY'])) {

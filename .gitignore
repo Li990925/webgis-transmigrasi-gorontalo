@@ -28,3 +28,4 @@ Thumbs.db
 /staging
 /.agents
 /.claude
+*.zip
