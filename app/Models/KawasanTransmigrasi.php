@@ -78,7 +78,7 @@ class KawasanTransmigrasi extends Model
     {
         static::saving(function (self $model) {
             if ($model->jumlah_kk > 0) {
-                $model->persentase_shm = round(($model->kk_shm / $model->jumlah_kk) * 100, 2);
+                $model->persentase_shm = min(100.0, max(0.0, round(($model->kk_shm / $model->jumlah_kk) * 100, 2)));
             }
         });
 

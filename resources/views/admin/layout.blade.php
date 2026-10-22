@@ -53,7 +53,7 @@
 <body class="bg-[#f0f4f9] text-gray-800 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
 
     <!-- ==================== TOP PANORAMIC HEADER BANNER ==================== -->
-    <header class="top-panoramic-banner w-full h-20 sm:h-22 border-b border-blue-950/40 px-3 sm:px-6 flex items-center justify-between text-white shadow-md relative z-30 select-none">
+    <header class="top-panoramic-banner w-full h-20 border-b border-blue-950/40 px-3 sm:px-6 flex items-center justify-between text-white shadow-md sticky top-0 z-40 select-none">
         
         <!-- Left: Branding & Official Emblem -->
         <div class="flex items-center gap-3">
@@ -138,10 +138,10 @@
     </header>
 
     <!-- ==================== BODY WRAPPER (SIDEBAR + MAIN CONTENT) ==================== -->
-    <div class="flex flex-1 min-h-[calc(100vh-80px)]">
+    <div class="flex flex-1 min-h-[calc(100vh-5rem)] bg-[#081e36]">
         
         <!-- ==================== LEFT SIDEBAR (DEEP NAVY BLUE) ==================== -->
-        <aside id="sidebar" class="w-64 bg-[#081e36] border-r border-[#0d2a4a] flex-shrink-0 flex flex-col justify-between hidden md:flex sticky top-0 h-[calc(100vh-80px)] z-20 shadow-lg text-white select-none">
+        <aside id="sidebar" class="w-64 bg-[#081e36] border-r border-[#0d2a4a] flex-shrink-0 flex flex-col justify-between hidden md:flex sticky top-20 h-[calc(100vh-5rem)] z-30 shadow-lg text-white select-none">
             <div class="overflow-y-auto py-3 px-3 space-y-1">
                 
                 <!-- 1. Dashboard (Active Pill) -->
@@ -357,7 +357,7 @@
             </main>
 
             <!-- Bottom Copyright Footer -->
-            <footer class="border-t border-slate-200/80 bg-white/70 py-3 px-6 text-center text-[11px] text-slate-500">
+            <footer class="border-t border-slate-200/80 bg-white/70 py-3 px-6 text-center text-[11px] text-slate-500 mt-auto">
                 Sistem Informasi Transmigrasi &bull; Dinas Tenaga Kerja, ESDM dan Transmigrasi Provinsi Gorontalo &bull; &copy; {{ date('Y') }}
             </footer>
 

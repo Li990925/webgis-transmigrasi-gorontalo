@@ -221,7 +221,7 @@ class KawasanTransmigrasiController extends Controller
 
         if (isset($validated['jumlah_kk']) && isset($validated['kk_shm'])) {
             $validated['persentase_shm'] = $validated['jumlah_kk'] > 0
-                ? round(($validated['kk_shm'] / $validated['jumlah_kk']) * 100, 2)
+                ? min(100.0, max(0.0, round(($validated['kk_shm'] / $validated['jumlah_kk']) * 100, 2)))
                 : 0;
 
             if (isset($validated['luas_ha'])) {
