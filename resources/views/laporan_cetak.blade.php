@@ -91,23 +91,28 @@
 
         /* Kop Surat Resmi */
         .kop-surat {
+            position: relative;
             display: flex;
             align-items: center;
-            gap: 24px;
+            justify-content: center;
+            min-height: 85px;
             padding-bottom: 14px;
-            position: relative;
         }
 
         .kop-logo {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
             width: 82px;
             height: 82px;
             object-fit: contain;
-            border-radius: 8px;
         }
 
         .kop-text {
-            flex: 1;
+            width: 100%;
             text-align: center;
+            padding: 0 90px;
         }
 
         .kop-pemprov {
@@ -137,6 +142,23 @@
             border: 0;
             border-top: 3px double #0f172a;
             margin: 8px 0 24px 0;
+        }
+
+        @media (max-width: 640px) {
+            .kop-surat {
+                flex-direction: column;
+                min-height: auto;
+                text-align: center;
+                gap: 12px;
+            }
+            .kop-logo {
+                position: static;
+                transform: none;
+                margin: 0 auto;
+            }
+            .kop-text {
+                padding: 0;
+            }
         }
 
         /* Header Laporan */
@@ -309,6 +331,20 @@
                 display: none !important;
             }
 
+            .kop-surat {
+                min-height: 80px;
+                padding-bottom: 8px;
+            }
+
+            .kop-logo {
+                width: 76px;
+                height: 76px;
+            }
+
+            .kop-text {
+                padding: 0 84px;
+            }
+
             table {
                 page-break-inside: auto;
             }
@@ -358,7 +394,6 @@
                     Pos-el: disnakertrans@gorontaloprov.go.id | Laman Resmi: webgis-transmigrasi.gorontaloprov.go.id
                 </div>
             </div>
-            <img src="{{ asset('images/logo.png') }}" alt="Lambang Daerah Provinsi Gorontalo" class="kop-logo" onerror="this.style.display='none'">
         </div>
 
         <hr class="kop-divider">
