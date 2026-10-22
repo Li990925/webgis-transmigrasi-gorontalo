@@ -55,5 +55,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/kawasan/{kawasanTransmigrasi}/spasial', [AdminController::class, 'kawasanSpasial'])->name('kawasan.spasial');
     Route::get('/klasterisasi', [AdminController::class, 'klasterisasi'])->name('klasterisasi');
     Route::get('/audit-logs', [AdminController::class, 'auditLogs'])->name('audit-logs');
+    Route::post('/audit-logs/mark-as-read', [AdminController::class, 'markAuditLogsAsRead'])->name('audit-logs.read');
     Route::resource('users', UserController::class)->except(['show']);
 });

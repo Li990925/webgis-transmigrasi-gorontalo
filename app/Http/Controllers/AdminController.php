@@ -6,6 +6,7 @@ use App\Models\AuditLog;
 use App\Models\KawasanTransmigrasi;
 use App\Models\User;
 use App\Services\ClusteringService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -242,6 +243,13 @@ class AdminController extends Controller
         /** @var User $user */
         $user = Auth::user();
 
+        // Mark all audit logs as read upon visiting the page
+        $now = now();
+        if ($user) {
+            $user->update(['last_audit_seen_at' => $now]);
+        }
+        session(['audit_logs_last_viewed_at' => $now]);
+
         $query = AuditLog::orderByDesc('created_at');
 
         if ($request->filled('action') && $request->action !== 'all') {
@@ -264,5 +272,26 @@ class AdminController extends Controller
         $logs = $query->paginate(20)->withQueryString();
 
         return view('admin.audit_logs', compact('user', 'logs'));
+    }
+
+    /**
+     * Mark audit logs notification as read via AJAX.
+     */
+    public function markAuditLogsAsRead(): JsonResponse
+    {
+        /** @var User|null $user */
+        $user = Auth::user();
+        $now = now();
+
+        if ($user) {
+            $user->update(['last_audit_seen_at' => $now]);
+        }
+        session(['audit_logs_last_viewed_at' => $now]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Notifikasi aktivitas telah ditandai sudah dibaca.',
+            'last_audit_seen_at' => $now->toIso8601String(),
+        ]);
     }
 }

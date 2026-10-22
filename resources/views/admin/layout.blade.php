@@ -222,7 +222,15 @@
                     <!-- Notification Bell with Dropdown Popover & Link to Activity Logs -->
                     @php
                         $recentAuditNotifications = \App\Models\AuditLog::latest()->take(5)->get();
-                        $unreadNotifCount = min(9, $recentAuditNotifications->count());
+                        $lastAuditSeenAt = Auth::user()?->last_audit_seen_at ?? session('audit_logs_last_viewed_at');
+                        
+                        if (request()->routeIs('admin.audit-logs')) {
+                            $unreadNotifCount = 0;
+                        } elseif ($lastAuditSeenAt) {
+                            $unreadNotifCount = \App\Models\AuditLog::where('created_at', '>', $lastAuditSeenAt)->count();
+                        } else {
+                            $unreadNotifCount = min(5, $recentAuditNotifications->count());
+                        }
                     @endphp
                     <div class="relative" id="notification-wrapper">
                         <button id="notification-bell-btn" type="button" 
@@ -232,8 +240,8 @@
                             aria-haspopup="true">
                             <svg class="w-4 h-4 text-blue-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
                             @if($unreadNotifCount > 0)
-                                <span class="absolute -top-1 -right-1 min-w-4 h-4 px-1 rounded-full bg-rose-600 text-white text-[10px] font-bold flex items-center justify-center shadow-xs border border-white/40">
-                                    {{ $unreadNotifCount }}
+                                <span id="notif-badge" class="absolute -top-1 -right-1 min-w-4 h-4 px-1 rounded-full bg-rose-600 text-white text-[10px] font-bold flex items-center justify-center shadow-xs border border-white/40">
+                                    {{ $unreadNotifCount > 9 ? '9+' : $unreadNotifCount }}
                                 </span>
                             @endif
                         </button>
@@ -248,9 +256,16 @@
                                     </div>
                                     <h4 class="text-xs font-bold text-slate-900">Aktivitas Sistem Terbaru</h4>
                                 </div>
-                                <a href="{{ route('admin.audit-logs') }}" class="text-[10px] text-[#1a73e8] hover:text-blue-700 font-bold hover:underline flex items-center gap-1">
-                                    Lihat Semua &rarr;
-                                </a>
+                                <div class="flex items-center gap-2">
+                                    @if($unreadNotifCount > 0)
+                                        <button type="button" id="btn-mark-all-read" class="text-[10px] text-slate-500 hover:text-blue-600 font-medium hover:underline cursor-pointer" title="Tandai semua sudah dibaca">
+                                            Tandai Dibaca
+                                        </button>
+                                    @endif
+                                    <a href="{{ route('admin.audit-logs') }}" class="text-[10px] text-[#1a73e8] hover:text-blue-700 font-bold hover:underline flex items-center gap-1">
+                                        Lihat Semua &rarr;
+                                    </a>
+                                </div>
                             </div>
 
                             <!-- List of Recent Audit Logs -->
@@ -466,6 +481,15 @@
         // Notification Bell Dropdown Toggle & Click-outside handler
         const notifBtn = document.getElementById('notification-bell-btn');
         const notifDropdown = document.getElementById('notification-dropdown');
+        const notifBadge = document.getElementById('notif-badge');
+        const btnMarkRead = document.getElementById('btn-mark-all-read');
+
+        // If user is currently on the audit-logs page, immediately ensure the badge is hidden
+        if (window.location.pathname.includes('/admin/audit-logs')) {
+            if (notifBadge) {
+                notifBadge.remove();
+            }
+        }
 
         if (notifBtn && notifDropdown) {
             notifBtn.addEventListener('click', function(e) {
@@ -486,6 +510,36 @@
                     notifDropdown.classList.add('hidden');
                     notifBtn.setAttribute('aria-expanded', 'false');
                 }
+            });
+
+            // When clicking any link inside dropdown pointing to audit-logs, immediately clear the badge
+            notifDropdown.querySelectorAll('a[href*="audit-logs"]').forEach(link => {
+                link.addEventListener('click', function() {
+                    const badge = document.getElementById('notif-badge');
+                    if (badge) badge.remove();
+                });
+            });
+        }
+
+        // Handle Mark as Read AJAX
+        if (btnMarkRead) {
+            btnMarkRead.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const badge = document.getElementById('notif-badge');
+                if (badge) badge.remove();
+                btnMarkRead.textContent = '✓ Terbaca';
+                btnMarkRead.classList.add('text-emerald-600', 'pointer-events-none');
+                btnMarkRead.classList.remove('hover:underline', 'text-slate-500');
+
+                fetch('{{ route("admin.audit-logs.read") }}', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).catch(err => console.error('Gagal menandai notifikasi dibaca', err));
             });
         }
     </script>

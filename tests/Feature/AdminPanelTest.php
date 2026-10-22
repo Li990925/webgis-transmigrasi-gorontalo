@@ -138,6 +138,32 @@ class AdminPanelTest extends TestCase
         $response->assertSee('Log Aktivitas Sistem', false);
         $response->assertSee('Waktu (WITA)', false);
         $response->assertSee('Tipe Aksi', false);
+
+        // Assert that visiting the audit logs page clears the notification badge
+        $response->assertDontSee('id="notif-badge"', false);
+        $admin->refresh();
+        $this->assertNotNull($admin->last_audit_seen_at);
+
+        // Subsequent visit to dashboard also keeps badge hidden
+        $dashboardResponse = $this->actingAs($admin)->get('/admin');
+        $dashboardResponse->assertDontSee('id="notif-badge"', false);
+    }
+
+    /**
+     * Test AJAX mark audit logs as read.
+     */
+    public function test_can_mark_audit_logs_as_read_via_ajax(): void
+    {
+        $admin = User::where('role', 'super_admin')->first();
+
+        $response = $this->actingAs($admin)->postJson('/admin/audit-logs/mark-as-read');
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'success' => true,
+        ]);
+        $admin->refresh();
+        $this->assertNotNull($admin->last_audit_seen_at);
     }
 
     /**
