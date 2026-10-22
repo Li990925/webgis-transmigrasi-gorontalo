@@ -102,6 +102,8 @@ class AdminPanelTest extends TestCase
         $response->assertSee('Editor Spasial Kanvas Geoman', false);
         $response->assertSee('spatial-canvas', false);
         $response->assertSee('btn-save-geometry', false);
+        $response->assertSee('webgis-modal-backdrop', false);
+        $response->assertSee('showWebModal', false);
         $response->assertSee($kawasan->nama, false);
     }
 

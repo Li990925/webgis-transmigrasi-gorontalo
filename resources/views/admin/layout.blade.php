@@ -544,6 +544,9 @@
         }
     </script>
     
+    <!-- WebGIS Branded Modal Component -->
+    @include('partials.webgis-modal')
+
     @yield('scripts')
 </body>
 </html>

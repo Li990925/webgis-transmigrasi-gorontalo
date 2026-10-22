@@ -1480,5 +1480,8 @@
         pendSearch?.addEventListener('input', filterPendukungCards);
         pendKabFilter?.addEventListener('change', filterPendukungCards);
     </script>
+
+    <!-- WebGIS Branded Modal Component -->
+    @include('partials.webgis-modal')
 </body>
 </html>

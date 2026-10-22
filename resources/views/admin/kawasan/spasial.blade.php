@@ -218,7 +218,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (saveBtn) {
         saveBtn.addEventListener('click', async function() {
             if (!currentPolygon) {
-                alert('Silakan gambar atau tentukan poligon batas kawasan terlebih dahulu.');
+                window.showWebModal({
+                    type: 'warning',
+                    title: 'Batas Kawasan Belum Ditentukan',
+                    badge: 'Perhatian Geometri',
+                    message: 'Silakan gambar atau tentukan poligon batas kawasan terlebih dahulu pada peta sebelum menyimpan.',
+                    confirmText: 'OK, Mengerti'
+                });
                 return;
             }
 
@@ -267,13 +273,50 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (data.data?.postgis_area_ha) {
                         document.getElementById('stat-postgis-area').textContent = `${data.data.postgis_area_ha} Ha`;
                     }
-                    alert(data.message || 'Geometri spasial berhasil disimpan ke database PostGIS!');
+                    window.showWebModal({
+                        type: 'success',
+                        title: 'Geometri Berhasil Disimpan!',
+                        badge: 'PostGIS SRID 4326',
+                        message: data.message || 'Geometri kawasan {{ $kawasanTransmigrasi->nama }} berhasil disimpan ke database PostGIS!',
+                        details: `
+                            <div class="flex items-center justify-between py-1 border-b border-slate-200/70">
+                                <span class="text-slate-500">Database Engine:</span>
+                                <span class="font-bold text-slate-800">PostgreSQL / PostGIS</span>
+                            </div>
+                            <div class="flex items-center justify-between py-1 border-b border-slate-200/70">
+                                <span class="text-slate-500">Kawasan Transmigrasi:</span>
+                                <span class="font-bold text-slate-800">{{ $kawasanTransmigrasi->nama }}</span>
+                            </div>
+                            ${data.data?.postgis_area_ha ? `
+                            <div class="flex items-center justify-between py-1 border-b border-slate-200/70">
+                                <span class="text-slate-500">Luas Geodesik PostGIS:</span>
+                                <span class="font-bold text-emerald-700">${data.data.postgis_area_ha} Ha</span>
+                            </div>` : ''}
+                            <div class="flex items-center justify-between py-1">
+                                <span class="text-slate-500">Verteks Poligon:</span>
+                                <span class="font-bold text-slate-800">${polygon_geojson.length} Titik Koordinat</span>
+                            </div>
+                        `,
+                        confirmText: 'OK, Selesai'
+                    });
                 } else {
-                    alert('Gagal menyimpan: ' + (data.message || 'Terjadi kesalahan sistem.'));
+                    window.showWebModal({
+                        type: 'error',
+                        title: 'Gagal Menyimpan Geometri',
+                        badge: 'Kesalahan Sistem',
+                        message: 'Gagal menyimpan: ' + (data.message || 'Terjadi kesalahan sistem.'),
+                        confirmText: 'Tutup'
+                    });
                 }
             } catch (err) {
                 console.error(err);
-                alert('Gagal menghubungi server: ' + err.message);
+                window.showWebModal({
+                    type: 'error',
+                    title: 'Koneksi Terputus',
+                    badge: 'Jaringan / Server',
+                    message: 'Gagal menghubungi server: ' + err.message,
+                    confirmText: 'Tutup'
+                });
             } finally {
                 saveBtn.disabled = false;
                 saveBtn.innerHTML = `
