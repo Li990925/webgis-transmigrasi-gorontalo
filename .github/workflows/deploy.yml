@@ -50,14 +50,14 @@ jobs:
 
       - name: Prepare Shared Hosting Directory Structure
         run: |
-          echo "Membuat struktur isolasi keamanan untuk Shared Hosting..."
-          mkdir -p staging/core staging/htdocs
+          echo "Membuat struktur aplikasi untuk Shared Hosting (InfinityFree)..."
+          mkdir -p staging/htdocs/core
 
           # 1. Salin seluruh isi folder public ke staging/htdocs (Web Document Root)
           cp -r public/* staging/htdocs/
           cp public/.htaccess staging/htdocs/ 2>/dev/null || true
 
-          # 2. Salin seluruh kode Laravel ke staging/core (Terisolasi di Luar Web Root)
+          # 2. Salin seluruh kode Laravel ke staging/htdocs/core
           rsync -av --exclude='public' \
                     --exclude='.git' \
                     --exclude='.github' \
@@ -67,18 +67,28 @@ jobs:
                     --exclude='.env' \
                     --exclude='.env.*' \
                     --exclude='*.sql' \
-                    ./ staging/core/
+                    ./ staging/htdocs/core/
 
-          # 3. Pastikan folder writable storage dan cache tersedia di core
-          mkdir -p staging/core/storage/framework/cache/data
-          mkdir -p staging/core/storage/framework/app/cache
-          mkdir -p staging/core/storage/framework/sessions
-          mkdir -p staging/core/storage/framework/views
-          mkdir -p staging/core/storage/logs
-          touch staging/core/storage/logs/laravel.log
+          # 3. Kunci akses web langsung ke folder core dengan .htaccess proteksi ketat
+          cat << 'EOF' > staging/htdocs/core/.htaccess
+          <IfModule mod_authz_core.c>
+              Require all denied
+          </IfModule>
+          <IfModule !mod_authz_core.c>
+              Order deny,allow
+              Deny from all
+          </IfModule>
+          EOF
+
+          # 4. Pastikan folder writable storage dan cache tersedia di core
+          mkdir -p staging/htdocs/core/storage/framework/cache/data
+          mkdir -p staging/htdocs/core/storage/framework/app/cache
+          mkdir -p staging/htdocs/core/storage/framework/sessions
+          mkdir -p staging/htdocs/core/storage/framework/views
+          mkdir -p staging/htdocs/core/storage/logs
+          touch staging/htdocs/core/storage/logs/laravel.log
 
           echo "Struktur staging berhasil disiapkan:"
-          ls -la staging/
           ls -la staging/htdocs/
 
       - name: Check FTP Secrets Configuration
@@ -98,7 +108,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR || './transmigrasi-gorontalo.gt.tc/' }}
-          local-dir: ./staging/
+          server-dir: ${{ secrets.FTP_SERVER_DIR || './transmigrasi-gorontalo.gt.tc/htdocs/' }}
+          local-dir: ./staging/htdocs/
           dangerous-clean-slate: false
           timeout: 600000

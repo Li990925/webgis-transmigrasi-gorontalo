@@ -1,10 +1,12 @@
 <?php
 // Setup Helper untuk WebGIS Transmigrasi Gorontalo di Shared Hosting
 $coreDir = null;
-if (file_exists(__DIR__ . '/../core')) {
-    $coreDir = realpath(__DIR__ . '/../core');
-} elseif (file_exists(__DIR__ . '/../../core')) {
-    $coreDir = realpath(__DIR__ . '/../../core');
+if (file_exists(__DIR__.'/core')) {
+    $coreDir = realpath(__DIR__.'/core');
+} elseif (file_exists(__DIR__.'/bootstrap')) {
+    $coreDir = realpath(__DIR__);
+} else {
+    $coreDir = __DIR__.'/core';
 }
 
 $message = '';
@@ -12,30 +14,30 @@ $status = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['db_password'] ?? '';
-    if (!empty($password) && $coreDir) {
+    if (! empty($password) && $coreDir) {
         $env = "APP_NAME=\"WebGIS Transmigrasi Gorontalo\"\n"
-            . "APP_ENV=production\n"
-            . "APP_KEY=base64:fH7Nq5F8qYhR32eU2X5Vq8pL8G3m9V2wN1z0kX4y8wE=\n"
-            . "APP_DEBUG=false\n"
-            . "APP_URL=http://transmigrasi-gorontalo.gt.tc\n\n"
-            . "APP_LOCALE=id\n"
-            . "APP_FALLBACK_LOCALE=id\n\n"
-            . "LOG_CHANNEL=stack\n"
-            . "LOG_STACK=single\n"
-            . "LOG_LEVEL=error\n\n"
-            . "DB_CONNECTION=mysql\n"
-            . "DB_HOST=sql211.infinityfree.com\n"
-            . "DB_PORT=3306\n"
-            . "DB_DATABASE=if0_42378255_transmigrasi\n"
-            . "DB_USERNAME=if0_42378255\n"
-            . "DB_PASSWORD=\"{$password}\"\n\n"
-            . "SESSION_DRIVER=file\n"
-            . "SESSION_LIFETIME=120\n"
-            . "CACHE_STORE=file\n"
-            . "QUEUE_CONNECTION=sync\n"
-            . "FILESYSTEM_DISK=local\n";
+            ."APP_ENV=production\n"
+            ."APP_KEY=base64:fH7Nq5F8qYhR32eU2X5Vq8pL8G3m9V2wN1z0kX4y8wE=\n"
+            ."APP_DEBUG=false\n"
+            ."APP_URL=http://transmigrasi-gorontalo.gt.tc\n\n"
+            ."APP_LOCALE=id\n"
+            ."APP_FALLBACK_LOCALE=id\n\n"
+            ."LOG_CHANNEL=stack\n"
+            ."LOG_STACK=single\n"
+            ."LOG_LEVEL=error\n\n"
+            ."DB_CONNECTION=mysql\n"
+            ."DB_HOST=sql211.infinityfree.com\n"
+            ."DB_PORT=3306\n"
+            ."DB_DATABASE=if0_42378255_transmigrasi\n"
+            ."DB_USERNAME=if0_42378255\n"
+            ."DB_PASSWORD=\"{$password}\"\n\n"
+            ."SESSION_DRIVER=file\n"
+            ."SESSION_LIFETIME=120\n"
+            ."CACHE_STORE=file\n"
+            ."QUEUE_CONNECTION=sync\n"
+            ."FILESYSTEM_DISK=local\n";
 
-        if (file_put_contents($coreDir . '/.env', $env)) {
+        if (file_put_contents($coreDir.'/.env', $env)) {
             $status = 'success';
             $message = 'File .env berhasil dibuat dan dikonfigurasi secara otomatis!';
         } else {
@@ -75,15 +77,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1>⚙️ Aktivasi WebGIS Transmigrasi</h1>
         <p>Masukkan password akun hosting InfinityFree Anda untuk menghubungkan database ke sistem WebGIS secara otomatis.</p>
 
-        <?php if ($status === 'success'): ?>
+        <?php if ($status === 'success') { ?>
             <div class="alert-success">
                 <strong>Berhasil!</strong> <?= htmlspecialchars($message) ?><br><br>
                 <a href="/" class="btn-home">Buka WebGIS Sekarang &rarr;</a>
             </div>
-        <?php else: ?>
-            <?php if ($status === 'error'): ?>
+        <?php } else { ?>
+            <?php if ($status === 'error') { ?>
                 <div class="alert-error"><?= htmlspecialchars($message) ?></div>
-            <?php endif; ?>
+            <?php } ?>
 
             <form method="POST">
                 <div class="input-group">
@@ -92,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <button type="submit">Aktifkan & Hubungkan Database</button>
             </form>
-        <?php endif; ?>
+        <?php } ?>
     </div>
 </body>
 </html>

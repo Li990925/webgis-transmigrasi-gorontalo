@@ -19,15 +19,13 @@ if (version_compare(PHP_VERSION, '8.3.0', '<')) {
         .'</div>');
 }
 
-// Detect application core path (support shared hosting isolated core/ directory)
-if (file_exists(__DIR__.'/../core/bootstrap/app.php')) {
-    $corePath = __DIR__.'/../core';
-} elseif (file_exists(__DIR__.'/../../core/bootstrap/app.php')) {
-    $corePath = __DIR__.'/../../core';
+// Detect application core path inside htdocs (avoids open_basedir restrictions on InfinityFree)
+if (file_exists(__DIR__.'/core/bootstrap/app.php')) {
+    $corePath = __DIR__.'/core';
 } elseif (file_exists(__DIR__.'/bootstrap/app.php')) {
     $corePath = __DIR__;
 } else {
-    $corePath = __DIR__.'/..';
+    $corePath = __DIR__.'/core';
 }
 
 if (! file_exists($corePath.'/vendor/autoload.php')) {

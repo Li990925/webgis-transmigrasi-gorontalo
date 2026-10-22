@@ -5,6 +5,10 @@
 
     RewriteEngine On
 
+    # Block direct web access to core folder, sensitive files, and env
+    RewriteRule ^core(/|$) - [F,L]
+    RewriteRule \.(env|git|lock|yml|yaml|json)$ - [F,L]
+
     # Block access to hidden files and directories (dotfiles)
     RewriteRule (^|/)\.(?!well-known/) - [F]
 
