@@ -147,4 +147,18 @@ class RBACAndSecurityTest extends TestCase
             ],
         ]);
     }
+
+    /**
+     * Test application responses include recommended HTTP security headers.
+     */
+    public function test_responses_include_security_headers(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertHeader('X-Content-Type-Options', 'nosniff');
+        $response->assertHeader('X-Frame-Options', 'SAMEORIGIN');
+        $response->assertHeader('X-XSS-Protection', '1; mode=block');
+        $response->assertHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    }
 }
